@@ -23,22 +23,34 @@
 
 // TODO: Add strict mode
 
-var chaste = require('chaste')
 var reduce = require('lodash/reduce')
+var chaste = require('chaste')
+var lodash = require('lodash')
 
-function Ardent (schema) {
-  if (!(this instanceof Ardent)) return new Ardent(schema)
+function createSchemaRule (rule) {
+  var blueprint = {}
+  var schema = typeof rule === 'function' ? { type: rule } : rule
+  return lodash.assign(blueprint, schema)
+}
 
-  var definitions = reduce(schema, function addRule (acc, schemaRule, schemaRuleName) {
-    var rule = schemaRule.type || schemaRule
-    acc[schemaRuleName] = chaste(rule)
-    return acc
-  }, {})
+function addSchemaRule (schema, blueprint, name) {
+  var rule = createSchemaRule(blueprint)
+  rule.type = chaste(rule.type)
+  schema[name] = rule
+  return schema
+}
+
+function Ardent (schemaBlueprint) {
+  if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint)
+
+  var schema = reduce(schemaBlueprint, addSchemaRule, {})
 
   function ardent (obj) {
-    return reduce(definitions, function applyRule (acc, chaste, name) {
-      acc[name] = chaste(obj[name])
-      return acc
+    obj = obj || {}
+
+    return reduce(schema, function applyRule (objSchema, rule, name) {
+      objSchema[name] = obj[name] ? rule.type(obj[name]) : rule.default
+      return objSchema
     }, {})
   }
 
