@@ -4,7 +4,6 @@
 node_modules
 npm-debug.log
 
-
 ############################
 # tmp, editor & OS files
 ############################
@@ -13,19 +12,18 @@ npm-debug.log
 *.swp
 *.swn
 *.swm
-.DS_STORE
 *#
 *~
 .idea
+*sublime*
+.DS_Store
 nbproject
-
 
 ############################
 # Tests
 ############################
 testApp
 coverage
-
 
 ############################
 # Other
