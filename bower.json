@@ -1,0 +1,27 @@
+{
+  "name": "ardent",
+  "description": "fancy object modeling",
+  "homepage": "https://github.com/Kikobeats/ardent",
+  "version": "0.0.0",
+  "main": "./dist/ardent.js",
+  "authors": [
+    {
+      "email": "josefrancisco.verdu@gmail.com",
+      "name": "Kiko Beats",
+      "url": "https://github.com/Kikobeats"
+    }
+  ],
+  "repository": "Kikobeats/ardent",
+  "bugs": {
+    "url": "https://github.com/Kikobeats/ardent/issues"
+  },
+  "keywords": [],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "test",
+    "tests"
+  ],
+  "license": "MIT"
+}
