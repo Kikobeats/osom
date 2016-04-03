@@ -1,11 +1,5 @@
 # ardent
 
-<p align="center">
-  <br>
-  <img src="https://i.imgur.com/Mh13XWB.gif" alt="ardent">
-  <br>
-</p>
-
 ![Last version](https://img.shields.io/github/tag/Kikobeats/ardent.svg?style=flat-square)
 [![Build Status](http://img.shields.io/travis/Kikobeats/ardent/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/ardent)
 [![Dependency status](http://img.shields.io/david/Kikobeats/ardent.svg?style=flat-square)](https://david-dm.org/Kikobeats/ardent)
@@ -13,7 +7,7 @@
 [![NPM Status](http://img.shields.io/npm/dm/ardent.svg?style=flat-square)](https://www.npmjs.org/package/ardent)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-> fancy object modeling
+> Fancy Object Schema Modeling. Inspired in [Mongoose Schema](https://github.com/Automattic/mongoose#defining-a-model) but out of the box.
 
 ## Install
 
@@ -35,31 +29,83 @@ and later link in your HTML:
 ## Usage
 
 ```js
-const ardent = require('ardent')
+var Ardent = require('ardent')
 
-ardent('do something')
-//=> return something
+function trim (str) {
+  return str.trim()
+}
+
+// setup your schema
+var schema = {
+  age: {
+    type: String,
+    default: '23',
+    filter: [trim]
+  }
+}
+
+// creating schema validation
+var ardent = Ardent(schema)
+
+// schema factory
+ardent({age: '  23  '}).should.be.eql({age: '23'})
 ```
 
 ## API
 
-### ardent(input, [options])
+### ardent(schema, [options])
 
-#### input
+#### schema
 
-*Required*
-Type: `string`
+*Required*<br>
+Type: `object`
 
-Lorem ipsum.
+Created a Factory for validate a schema based in a set of rules.
+
+Rules are setup following two approach
+
+##### Basic
+
+Just provide `key/value` pair per rule, where `key` is the name of the rule and `value` the type casting result:
+
+```js
+var basicSchema = {
+  age: Number
+}
+```
+
+##### Advanced
+
+The *basic* mode is a simplification of the *advanced* mode. 
+
+While in *basic* mode only is possible setup `type` casting, in *advanced* mode you can setup more things providing a configurable `object`.
+
+The following keys setup your rule:
+
+- `type`: as in *basic* mode, it specifies the type casting of the output value.
+- `default`: whatever default value that you can set if `nill` value as input is provided.
+- `filter`: an `Array` collection of data transforms as pipeline of methods to apply for the input value.
+
+```js
+function trim (str) {
+  return str.trim()
+}
+    
+var advancedSchema = {
+  age: {
+    type: String,
+    default: '23',
+    filter: [trim]
+  }
+}
+```
 
 #### options
 
-##### foo
+Type: `object`
+Default: `soon`
 
-Type: `boolean`
-Default: `false`
-
-Lorem ipsum.
+*soon*
 
 ## License
 
