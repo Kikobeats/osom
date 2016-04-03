@@ -2,20 +2,23 @@
   "name": "ardent",
   "description": "Fancy Object Schema Modeling. Inspired in Mongoose Schema defintion but out of box.",
   "homepage": "https://github.com/Kikobeats/ardent",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "./index.js",
   "author": {
-    "email": "josefrancisco.verdu@gmail.com",
     "name": "Kiko Beats",
+    "email": "josefrancisco.verdu@gmail.com",
     "url": "https://github.com/Kikobeats"
   },
-  "repository": "Kikobeats/ardent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikobeats/ardent.git"
+  },
   "bugs": {
     "url": "https://github.com/Kikobeats/ardent/issues"
   },
   "keywords": [
-    "schema",
-    "modeling"
+    "modeling",
+    "schema"
   ],
   "dependencies": {
     "chaste": "~1.1.0",
