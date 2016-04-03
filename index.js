@@ -28,6 +28,10 @@ var assign = require('lodash/assign')
 var flow = require('lodash/flow')
 var chaste = require('chaste')
 
+function exists (value) {
+  return value != null
+}
+
 function createSchemaRule (rule) {
   var blueprint = { filter: [] }
   var schema = typeof rule === 'function' ? { type: rule } : rule
@@ -51,7 +55,7 @@ function Ardent (schemaBlueprint) {
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
       var applyFilters = flow(rule.filter)
-      var value = obj[name] ? rule.type(obj[name]) : rule.default
+      var value = exists(obj[name]) ? rule.type(obj[name]) : rule.default
       objSchema[name] = applyFilters(value)
       return objSchema
     }, {})
