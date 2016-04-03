@@ -22,4 +22,20 @@ describe('schema defintion', function () {
     var ardent = Ardent(schema)
     ardent().should.be.eql({age: 23})
   })
+
+  it('support filters', function () {
+    function trim (str) {
+      return str.trim()
+    }
+
+    var schema = {
+      age: {
+        type: String,
+        filter: [trim]
+      }
+    }
+
+    var ardent = Ardent(schema)
+    ardent({age: '  23  '}).should.be.eql({age: '23'})
+  })
 })

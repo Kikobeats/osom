@@ -24,13 +24,14 @@
 // TODO: Add strict mode
 
 var reduce = require('lodash/reduce')
+var assign = require('lodash/assign')
+var flow = require('lodash/flow')
 var chaste = require('chaste')
-var lodash = require('lodash')
 
 function createSchemaRule (rule) {
-  var blueprint = {}
+  var blueprint = { filter: [] }
   var schema = typeof rule === 'function' ? { type: rule } : rule
-  return lodash.assign(blueprint, schema)
+  return assign(blueprint, schema)
 }
 
 function addSchemaRule (schema, blueprint, name) {
@@ -49,7 +50,9 @@ function Ardent (schemaBlueprint) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
-      objSchema[name] = obj[name] ? rule.type(obj[name]) : rule.default
+      var applyFilters = flow(rule.filter)
+      var value = obj[name] ? rule.type(obj[name]) : rule.default
+      objSchema[name] = applyFilters(value)
       return objSchema
     }, {})
   }

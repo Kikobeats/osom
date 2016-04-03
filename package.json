@@ -15,7 +15,10 @@
   },
   "keywords": [],
   "dependencies": {
-    "chaste": "~1.0.0"
+    "chaste": "~1.1.0",
+    "lodash.assign": "~4.0.7",
+    "lodash.flow": "~3.2.1",
+    "lodash.reduce": "~4.3.0"
   },
   "devDependencies": {
     "browserify": "latest",
