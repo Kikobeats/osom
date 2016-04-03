@@ -1,6 +1,6 @@
 {
   "name": "ardent",
-  "description": "fancy object modeling",
+  "description": "Fancy Object Schema Modeling. Inspired in Mongoose Schema defintion but out of box.",
   "homepage": "https://github.com/Kikobeats/ardent",
   "version": "0.0.0",
   "main": "./index.js",
@@ -13,7 +13,10 @@
   "bugs": {
     "url": "https://github.com/Kikobeats/ardent/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "schema",
+    "modeling"
+  ],
   "dependencies": {
     "chaste": "~1.1.0",
     "lodash.assign": "~4.0.7",

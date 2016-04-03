@@ -1,6 +1,6 @@
 {
   "name": "ardent",
-  "description": "fancy object modeling",
+  "description": "Fancy Object Schema Modeling. Inspired in Mongoose Schema defintion but out of box.",
   "homepage": "https://github.com/Kikobeats/ardent",
   "version": "0.0.0",
   "main": "./dist/ardent.js",
@@ -15,7 +15,10 @@
   "bugs": {
     "url": "https://github.com/Kikobeats/ardent/issues"
   },
-  "keywords": [],
+  "keywords": [
+    "schema",
+    "modeling"
+  ],
   "ignore": [
     "**/.*",
     "bower_components",
