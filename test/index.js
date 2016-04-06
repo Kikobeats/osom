@@ -38,4 +38,19 @@ describe('schema defintion', function () {
     var ardent = Ardent(schema)
     ardent({age: '  23  '}).should.be.eql({age: '23'})
   })
+
+  describe('support required values', function () {
+    it('throw an error under no values', function () {
+      var schema = {
+        age: {
+          type: String,
+          required: true
+        }
+      }
+
+      var ardent = Ardent(schema)
+      var errMessage = "Need to provide {String} for 'age' field."
+      ;(function () { ardent() }).should.throw(errMessage)
+    })
+  })
 })

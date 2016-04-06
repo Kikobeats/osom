@@ -26,7 +26,10 @@
 var reduce = require('lodash/reduce')
 var assign = require('lodash/assign')
 var flow = require('lodash/flow')
+var Whoops = require('whoops')
 var chaste = require('chaste')
+
+var ENOTYPE = Whoops.create('ENOTYPE')
 
 function exists (value) {
   return value != null
@@ -38,24 +41,42 @@ function createSchemaRule (rule) {
   return assign(blueprint, schema)
 }
 
-function addSchemaRule (schema, blueprint, name) {
-  var rule = createSchemaRule(blueprint)
-  rule.type = chaste(rule.type)
-  schema[name] = rule
+function addRule (schema, blueprint, name) {
+  schema[name] = createSchemaRule(blueprint)
   return schema
+}
+
+function throwError (name, type) {
+  var msg = 'Need to provide {' + type + "} for '" + name + "' field."
+  var err = ENOTYPE(msg)
+  throw err
 }
 
 function Ardent (schemaBlueprint) {
   if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint)
 
-  var schema = reduce(schemaBlueprint, addSchemaRule, {})
+  var schemaTypes = {}
+
+  var schema = reduce(schemaBlueprint, function (schema, blueprint, name) {
+    schema = addRule(schema, blueprint, name)
+
+    var type = schema[name].type
+    schemaTypes[name] = type.name
+    schema[name].type = chaste(type)
+
+    return schema
+  }, {})
 
   function ardent (obj) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
       var applyFilters = flow(rule.filter)
-      var value = exists(obj[name]) ? rule.type(obj[name]) : rule.default
+      var hasValue = exists(obj[name])
+
+      if (rule.required && !hasValue) throwError(name, schemaTypes[name])
+
+      var value = hasValue ? rule.type(obj[name]) : rule.default
       objSchema[name] = applyFilters(value)
       return objSchema
     }, {})

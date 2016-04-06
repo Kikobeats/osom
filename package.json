@@ -24,7 +24,8 @@
     "chaste": "~1.1.0",
     "lodash.assign": "~4.0.7",
     "lodash.flow": "~3.2.1",
-    "lodash.reduce": "~4.3.0"
+    "lodash.reduce": "~4.3.0",
+    "whoops": "~2.0.1"
   },
   "devDependencies": {
     "browserify": "latest",
