@@ -76,7 +76,12 @@ function Ardent (schemaBlueprint) {
 
       if (rule.required && !hasValue) throwError(name, schemaTypes[name])
 
-      var value = hasValue ? rule.type(obj[name]) : rule.default
+      var value
+
+      if (hasValue) value = rule.type(obj[name])
+      else if (typeof rule.default !== 'function') value = rule.default
+      else value = rule.default()
+
       objSchema[name] = applyFilters(value)
       return objSchema
     }, {})

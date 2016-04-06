@@ -12,15 +12,28 @@ describe('schema defintion', function () {
     })
   })
 
-  it('support default value', function () {
-    var schema = {
-      age: {
-        type: Number, default: 23
+  describe('support default value', function () {
+    it('based in a value', function () {
+      var schema = {
+        age: {
+          type: Number, default: 23
+        }
       }
-    }
 
-    var ardent = Ardent(schema)
-    ardent().should.be.eql({age: 23})
+      var ardent = Ardent(schema)
+      ardent().should.be.eql({age: 23})
+    })
+
+    it('based in a fn', function () {
+      var schema = {
+        age: {
+          type: Number, default: function () { return 23 }
+        }
+      }
+
+      var ardent = Ardent(schema)
+      ardent().should.be.eql({age: 23})
+    })
   })
 
   it('support filters', function () {
