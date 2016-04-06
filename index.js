@@ -23,6 +23,7 @@
 
 // TODO: Add strict mode
 
+var isFunction = require('lodash/isfunction')
 var reduce = require('lodash/reduce')
 var assign = require('lodash/assign')
 var flow = require('lodash/flow')
@@ -79,7 +80,7 @@ function Ardent (schemaBlueprint) {
       var value
 
       if (hasValue) value = rule.type(obj[name])
-      else if (typeof rule.default !== 'function') value = rule.default
+      else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
       objSchema[name] = applyFilters(value)

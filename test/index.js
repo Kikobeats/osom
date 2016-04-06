@@ -12,7 +12,7 @@ describe('schema defintion', function () {
     })
   })
 
-  describe('support default value', function () {
+  describe('support default values', function () {
     it('based in a value', function () {
       var schema = {
         age: {
