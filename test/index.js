@@ -65,5 +65,18 @@ describe('schema defintion', function () {
       var errMessage = "Need to provide {String} for 'age' field."
       ;(function () { ardent() }).should.throw(errMessage)
     })
+
+    it('custom error message', function () {
+      var schema = {
+        age: {
+          type: String,
+          required: [true, 'your message here']
+        }
+      }
+
+      var ardent = Ardent(schema)
+      var errMessage = 'your message here'
+      ;(function () { ardent() }).should.throw(errMessage)
+    })
   })
 })

@@ -21,9 +21,9 @@
 //   }
 // })
 
-// TODO: Add strict mode
-
 var isFunction = require('lodash/isfunction')
+var isArray = require('lodash/isArray')
+var isString = require('lodash/isString')
 var reduce = require('lodash/reduce')
 var assign = require('lodash/assign')
 var flow = require('lodash/flow')
@@ -47,8 +47,10 @@ function addRule (schema, blueprint, name) {
   return schema
 }
 
-function throwError (name, type) {
-  var msg = 'Need to provide {' + type + "} for '" + name + "' field."
+function throwError (name, type, required) {
+  var msg
+  if (isArray(required) && isString(required[1])) msg = required[1]
+  else msg = 'Need to provide {' + type + "} for '" + name + "' field."
   var err = ENOTYPE(msg)
   throw err
 }
@@ -75,7 +77,7 @@ function Ardent (schemaBlueprint) {
       var applyFilters = flow(rule.filter)
       var hasValue = exists(obj[name])
 
-      if (rule.required && !hasValue) throwError(name, schemaTypes[name])
+      if (rule.required && !hasValue) throwError(name, schemaTypes[name], rule.required)
 
       var value
 
