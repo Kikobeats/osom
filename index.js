@@ -22,8 +22,8 @@
 // })
 
 var isFunction = require('lodash/isfunction')
-var isArray = require('lodash/isArray')
-var isString = require('lodash/isString')
+var isArray = require('lodash/isarray')
+var isString = require('lodash/isstring')
 var reduce = require('lodash/reduce')
 var assign = require('lodash/assign')
 var flow = require('lodash/flow')
@@ -31,6 +31,16 @@ var Whoops = require('whoops')
 var chaste = require('chaste')
 
 var ENOTYPE = Whoops.create('ENOTYPE')
+var EARDENT = Whoops.create('EARDENT')
+
+// TODO: Add disable casting {casting: false}
+// TODO: Add validation like mongoose
+// validate: {
+//   validator: function(v) {
+//     return /\d{3}-\d{3}-\d{4}/.test(v)
+//   },
+//   message: '{VALUE} is not a valid phone number!'
+// },
 
 function exists (value) {
   return value != null
@@ -47,12 +57,16 @@ function addRule (schema, blueprint, name) {
   return schema
 }
 
-function throwError (name, type, required) {
+function throwTypeError (name, type, required) {
   var msg
   if (isArray(required) && isString(required[1])) msg = required[1]
   else msg = 'Need to provide {' + type + "} for '" + name + "' field."
   var err = ENOTYPE(msg)
   throw err
+}
+
+function throwError () {
+  throw EARDENT.apply([EARDENT, arguments])
 }
 
 function Ardent (schemaBlueprint) {
@@ -77,7 +91,7 @@ function Ardent (schemaBlueprint) {
       var applyFilters = flow(rule.filter)
       var hasValue = exists(obj[name])
 
-      if (rule.required && !hasValue) throwError(name, schemaTypes[name], rule.required)
+      if (rule.required && !hasValue) throwTypeError(name, schemaTypes[name], rule.required)
 
       var value
 
@@ -85,7 +99,7 @@ function Ardent (schemaBlueprint) {
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
-      objSchema[name] = applyFilters(value)
+      objSchema[name] = applyFilters(value, throwError)
       return objSchema
     }, {})
   }
