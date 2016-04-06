@@ -27,8 +27,7 @@
     "lodash.isarray": "~4.0.0",
     "lodash.isfunction": "~3.0.8",
     "lodash.isstring": "~4.0.1",
-    "lodash.reduce": "~4.3.0",
-    "whoops": "~2.0.1"
+    "lodash.reduce": "~4.3.0"
   },
   "devDependencies": {
     "browserify": "latest",

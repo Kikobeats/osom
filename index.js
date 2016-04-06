@@ -27,11 +27,7 @@ var isString = require('lodash.isstring')
 var reduce = require('lodash.reduce')
 var assign = require('lodash.assign')
 var flow = require('lodash.flow')
-var Whoops = require('whoops')
 var chaste = require('chaste')
-
-var ENOTYPE = Whoops.create('ENOTYPE')
-var EARDENT = Whoops.create('EARDENT')
 
 // TODO: Add disable casting {casting: false}
 // TODO: Add validation like mongoose
@@ -60,13 +56,8 @@ function addRule (schema, blueprint, name) {
 function throwTypeError (name, type, required) {
   var msg
   if (isArray(required) && isString(required[1])) msg = required[1]
-  else msg = 'Need to provide {' + type + "} for '" + name + "' field."
-  var err = ENOTYPE(msg)
-  throw err
-}
-
-function throwError () {
-  throw EARDENT.apply([EARDENT, arguments])
+  else msg = 'Expected a ' + type + " for '" + name + "'."
+  throw new TypeError(msg)
 }
 
 function Ardent (schemaBlueprint) {
@@ -99,7 +90,7 @@ function Ardent (schemaBlueprint) {
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
-      objSchema[name] = applyFilters(value, throwError)
+      objSchema[name] = applyFilters(value)
       return objSchema
     }, {})
   }

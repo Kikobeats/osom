@@ -62,7 +62,7 @@ describe('schema defintion', function () {
       }
 
       var ardent = Ardent(schema)
-      var errMessage = "Need to provide {String} for 'age' field."
+      var errMessage = "Expected a String for 'age'."
       ;(function () { ardent() }).should.throw(errMessage)
     })
 
