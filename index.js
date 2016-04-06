@@ -21,12 +21,12 @@
 //   }
 // })
 
-var isFunction = require('lodash/isfunction')
-var isArray = require('lodash/isarray')
-var isString = require('lodash/isstring')
-var reduce = require('lodash/reduce')
-var assign = require('lodash/assign')
-var flow = require('lodash/flow')
+var isFunction = require('lodash.isfunction')
+var isArray = require('lodash.isarray')
+var isString = require('lodash.isstring')
+var reduce = require('lodash.reduce')
+var assign = require('lodash.assign')
+var flow = require('lodash.flow')
 var Whoops = require('whoops')
 var chaste = require('chaste')
 
