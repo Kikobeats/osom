@@ -1,32 +1,11 @@
 'use strict'
 
-// var schema = new Schema({
-//   name:    String,
-//   binary:  Buffer,
-//   living:  Boolean,
-//   updated: { type: Date, default: Date.now },
-//   age:     { type: Number, min: 18, max: 65 },
-//   mixed:   Schema.Types.Mixed,
-//   _someId: Schema.Types.ObjectId,
-//   array:      [],
-//   ofString:   [String],
-//   ofNumber:   [Number],
-//   ofDates:    [Date],
-//   ofBuffer:   [Buffer],
-//   ofBoolean:  [Boolean],
-//   ofMixed:    [Schema.Types.Mixed],
-//   ofObjectId: [Schema.Types.ObjectId],
-//   nested: {
-//     stuff: { type: String, lowercase: true, trim: true }
-//   }
-// })
-
 var isFunction = require('lodash.isfunction')
 var isString = require('lodash.isstring')
+var assign = require('lodash.assign')
 var isArray = require('lodash.isarray')
 var reduce = require('lodash.reduce')
-var assign = require('lodash.assign')
-var flow = require('lodash/flow')
+var merge = require('lodash.merge')
 var chaste = require('chaste')
 var type = require('fn-type')
 
@@ -41,13 +20,14 @@ var DEFAULT = {
   }
 }
 
-function createSchemaRule (rule) {
+function createSchemaRule (rule, globalRules) {
   var schema = typeof rule === 'function' ? { type: rule } : rule
-  return assign({}, DEFAULT.BLUEPRINT, schema)
+  var fields = merge(globalRules, schema)
+  return assign({}, DEFAULT.BLUEPRINT, fields)
 }
 
-function addRule (schema, blueprint, name) {
-  schema[name] = createSchemaRule(blueprint)
+function addRule (globalRules, schema, blueprint, name) {
+  schema[name] = createSchemaRule(blueprint, globalRules)
   return schema
 }
 
@@ -65,13 +45,14 @@ function throwValidationError (name, value, desription) {
   throw new TypeError(msg)
 }
 
-function Ardent (schemaBlueprint) {
-  if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint)
+function Ardent (schemaBlueprint, globalRules) {
+  if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint, globalRules)
+  globalRules = globalRules || {}
 
   var schemaTypes = {}
 
   var schema = reduce(schemaBlueprint, function (schema, blueprint, name) {
-    schema = addRule(schema, blueprint, name)
+    schema = addRule(globalRules, schema, blueprint, name)
 
     var type = schema[name].type
     schemaTypes[name] = type.name.toLowerCase()
@@ -84,7 +65,6 @@ function Ardent (schemaBlueprint) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
-      var transforms = flow(rule.transform)
       var hasValue = exists(obj[name])
 
       if ((rule.required && !hasValue) ||
@@ -97,7 +77,10 @@ function Ardent (schemaBlueprint) {
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
-      value = transforms(value)
+      // lodash.flow is buggy, this is a bugfix
+      value = reduce(rule.transform, function (acc, fn) {
+        return fn(acc)
+      }, value)
 
       if (rule.validate) {
         var validator = isFunction(rule.validate) ? rule.validate : rule.validate.validator

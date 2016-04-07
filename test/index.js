@@ -148,3 +148,24 @@ describe('schema defintion', function () {
     })
   })
 })
+
+describe('behavior', function () {
+  it('custom global values', function () {
+    function trim (str) {
+      return str.trim()
+    }
+
+    var schema = {
+      age: {
+        type: String
+      }
+    }
+
+    var globalFields = {
+      transform: [trim]
+    }
+
+    var ardent = Ardent(schema, globalFields)
+    ardent({age: '  23  '}).should.be.eql({age: '23'})
+  })
+})
