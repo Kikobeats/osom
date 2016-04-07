@@ -2,8 +2,8 @@
 
 var isFunction = require('lodash.isfunction')
 var isString = require('lodash.isstring')
-var assign = require('lodash.assign')
 var isArray = require('lodash.isarray')
+var assign = require('lodash.assign')
 var reduce = require('lodash.reduce')
 var merge = require('lodash.merge')
 var chaste = require('chaste')
@@ -73,9 +73,9 @@ function Ardent (schemaBlueprint, globalRules) {
       }
 
       var value
-      if (hasValue) value = rule.type(obj[name])
-      else if (!isFunction(rule.default)) value = rule.default
-      else value = rule.default()
+      if (rule.casting && hasValue) value = rule.type(obj[name])
+      else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
+      else value = obj[name]
 
       // lodash.flow is buggy, this is a bugfix
       value = reduce(rule.transform, function (acc, fn) {
