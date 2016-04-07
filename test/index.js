@@ -62,7 +62,7 @@ describe('schema defintion', function () {
       }
 
       var ardent = Ardent(schema)
-      var errMessage = "Expected a String for 'age'."
+      var errMessage = "Expected a {string} for 'age'."
       ;(function () { ardent() }).should.throw(errMessage)
     })
 
@@ -77,6 +77,22 @@ describe('schema defintion', function () {
       var ardent = Ardent(schema)
       var errMessage = 'your message here'
       ;(function () { ardent() }).should.throw(errMessage)
+    })
+  })
+
+  it('disabling casting', function () {
+    var schema = {
+      age: {
+        type: String,
+        casting: false
+      }
+    }
+
+    var errMessage = "Expected a {string} for 'age'."
+    var ardent = Ardent(schema)
+
+    ;[null, {age: 23}].forEach(function (obj) {
+      ;(function () { ardent(obj) }).should.throw(errMessage)
     })
   })
 })

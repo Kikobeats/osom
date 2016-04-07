@@ -22,14 +22,14 @@
 // })
 
 var isFunction = require('lodash.isfunction')
-var isArray = require('lodash.isarray')
 var isString = require('lodash.isstring')
+var isArray = require('lodash.isarray')
 var reduce = require('lodash.reduce')
 var assign = require('lodash.assign')
 var flow = require('lodash/flow')
 var chaste = require('chaste')
+var type = require('fn-type')
 
-// TODO: Add disable casting {casting: false}
 // TODO: Add validation like mongoose
 // validate: {
 //   validator: function(v) {
@@ -42,10 +42,16 @@ function exists (value) {
   return value != null
 }
 
+var DEFAULT = {
+  BLUEPRINT: {
+    casting: true,
+    transform: []
+  }
+}
+
 function createSchemaRule (rule) {
-  var blueprint = { transform: [] }
   var schema = typeof rule === 'function' ? { type: rule } : rule
-  return assign(blueprint, schema)
+  return assign({}, DEFAULT.BLUEPRINT, schema)
 }
 
 function addRule (schema, blueprint, name) {
@@ -56,7 +62,7 @@ function addRule (schema, blueprint, name) {
 function throwTypeError (name, type, required) {
   var msg
   if (isArray(required) && isString(required[1])) msg = required[1]
-  else msg = 'Expected a ' + type + " for '" + name + "'."
+  else msg = 'Expected a {' + type + "} for '" + name + "'."
   throw new TypeError(msg)
 }
 
@@ -69,7 +75,7 @@ function Ardent (schemaBlueprint) {
     schema = addRule(schema, blueprint, name)
 
     var type = schema[name].type
-    schemaTypes[name] = type.name
+    schemaTypes[name] = type.name.toLowerCase()
     schema[name].type = chaste(type)
 
     return schema
@@ -82,10 +88,14 @@ function Ardent (schemaBlueprint) {
       var transforms = flow(rule.transform)
       var hasValue = exists(obj[name])
 
-      if (rule.required && !hasValue) throwTypeError(name, schemaTypes[name], rule.required)
+      console.log(schemaTypes[name])
+
+      if ((rule.required && !hasValue) ||
+        (!rule.casting && type(value !== schemaTypes[name]))) {
+        throwTypeError(name, schemaTypes[name], rule.required)
+      }
 
       var value
-
       if (hasValue) value = rule.type(obj[name])
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
