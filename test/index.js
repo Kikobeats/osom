@@ -36,7 +36,7 @@ describe('schema defintion', function () {
     })
   })
 
-  it('support filters', function () {
+  it('support transforms', function () {
     function trim (str) {
       return str.trim()
     }
@@ -44,7 +44,7 @@ describe('schema defintion', function () {
     var schema = {
       age: {
         type: String,
-        filter: [trim]
+        transform: [trim]
       }
     }
 

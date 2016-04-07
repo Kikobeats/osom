@@ -26,7 +26,7 @@ var isArray = require('lodash.isarray')
 var isString = require('lodash.isstring')
 var reduce = require('lodash.reduce')
 var assign = require('lodash.assign')
-var flow = require('lodash.flow')
+var flow = require('lodash/flow')
 var chaste = require('chaste')
 
 // TODO: Add disable casting {casting: false}
@@ -43,7 +43,7 @@ function exists (value) {
 }
 
 function createSchemaRule (rule) {
-  var blueprint = { filter: [] }
+  var blueprint = { transform: [] }
   var schema = typeof rule === 'function' ? { type: rule } : rule
   return assign(blueprint, schema)
 }
@@ -79,7 +79,7 @@ function Ardent (schemaBlueprint) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
-      var applyFilters = flow(rule.filter)
+      var transforms = flow(rule.transform)
       var hasValue = exists(obj[name])
 
       if (rule.required && !hasValue) throwTypeError(name, schemaTypes[name], rule.required)
@@ -90,7 +90,7 @@ function Ardent (schemaBlueprint) {
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
-      objSchema[name] = applyFilters(value)
+      objSchema[name] = transforms(value)
       return objSchema
     }, {})
   }
