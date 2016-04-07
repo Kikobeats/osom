@@ -95,4 +95,56 @@ describe('schema defintion', function () {
       ;(function () { ardent(obj) }).should.throw(errMessage)
     })
   })
+
+  describe('support validation', function () {
+    it('based in a function', function () {
+      var schema = {
+        age: {
+          type: String,
+          validate: function (v) {
+            return v === '23'
+          }
+        }
+      }
+
+      var ardent = Ardent(schema)
+      var errMessage = "Fail '25' validation for 'age'."
+      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+    })
+
+    it('based in a object key', function () {
+      var schema = {
+        age: {
+          type: String,
+          validate: {
+            validator: function (v) {
+              return v === '23'
+            }
+          }
+        }
+      }
+
+      var ardent = Ardent(schema)
+      var errMessage = "Fail '25' validation for 'age'."
+      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+    })
+
+    it('custom error message', function () {
+      var schema = {
+        age: {
+          type: String,
+          validate: {
+            validator: function (v) {
+              return v === '23'
+            },
+            message: 'expected a millenial instead of {VALUE}!'
+          }
+        }
+      }
+
+      var ardent = Ardent(schema)
+      var errMessage = 'expected a millenial instead of 25!'
+      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+    })
+  })
 })

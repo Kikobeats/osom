@@ -30,14 +30,6 @@ var flow = require('lodash/flow')
 var chaste = require('chaste')
 var type = require('fn-type')
 
-// TODO: Add validation like mongoose
-// validate: {
-//   validator: function(v) {
-//     return /\d{3}-\d{3}-\d{4}/.test(v)
-//   },
-//   message: '{VALUE} is not a valid phone number!'
-// },
-
 function exists (value) {
   return value != null
 }
@@ -66,6 +58,13 @@ function throwTypeError (name, type, required) {
   throw new TypeError(msg)
 }
 
+function throwValidationError (name, value, desription) {
+  var msg
+  if (desription) msg = desription.replace('{VALUE}', value)
+  else msg = "Fail '" + value + "' validation for '" + name + "'."
+  throw new TypeError(msg)
+}
+
 function Ardent (schemaBlueprint) {
   if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint)
 
@@ -88,8 +87,6 @@ function Ardent (schemaBlueprint) {
       var transforms = flow(rule.transform)
       var hasValue = exists(obj[name])
 
-      console.log(schemaTypes[name])
-
       if ((rule.required && !hasValue) ||
         (!rule.casting && type(value !== schemaTypes[name]))) {
         throwTypeError(name, schemaTypes[name], rule.required)
@@ -100,7 +97,14 @@ function Ardent (schemaBlueprint) {
       else if (!isFunction(rule.default)) value = rule.default
       else value = rule.default()
 
-      objSchema[name] = transforms(value)
+      value = transforms(value)
+
+      if (rule.validate) {
+        var validator = isFunction(rule.validate) ? rule.validate : rule.validate.validator
+        if (!validator(value)) throwValidationError(name, value, rule.validate.message)
+      }
+
+      objSchema[name] = value
       return objSchema
     }, {})
   }
