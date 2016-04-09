@@ -3,12 +3,12 @@
 'use strict'
 
 require('should')
-var Ardent = require('..')
+var osom = require('..')
 
 describe('schema defintion', function () {
   it('simple rule', function () {
     [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
-      Ardent(rule)({age: '23'}).should.be.eql({age: 23})
+      osom(rule)({age: '23'}).should.be.eql({age: 23})
     })
   })
 
@@ -20,8 +20,8 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
-      ardent().should.be.eql({age: 23})
+      var validator = osom(schema)
+      validator().should.be.eql({age: 23})
     })
 
     it('based in a fn', function () {
@@ -31,8 +31,8 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
-      ardent().should.be.eql({age: 23})
+      var validator = osom(schema)
+      validator().should.be.eql({age: 23})
     })
   })
 
@@ -48,8 +48,8 @@ describe('schema defintion', function () {
       }
     }
 
-    var ardent = Ardent(schema)
-    ardent({age: '  23  '}).should.be.eql({age: '23'})
+    var validator = osom(schema)
+    validator({age: '  23  '}).should.be.eql({age: '23'})
   })
 
   describe('support required values', function () {
@@ -61,9 +61,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
+      var validator = osom(schema)
       var errMessage = "Expected a {string} for 'age'."
-      ;(function () { ardent() }).should.throw(errMessage)
+      ;(function () { validator() }).should.throw(errMessage)
     })
 
     it('custom error message', function () {
@@ -74,9 +74,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
+      var validator = osom(schema)
       var errMessage = 'your message here'
-      ;(function () { ardent() }).should.throw(errMessage)
+      ;(function () { validator() }).should.throw(errMessage)
     })
   })
 
@@ -89,10 +89,10 @@ describe('schema defintion', function () {
     }
 
     var errMessage = "Expected a {string} for 'age'."
-    var ardent = Ardent(schema)
+    var validator = osom(schema)
 
     ;[null, {age: 23}].forEach(function (obj) {
-      ;(function () { ardent(obj) }).should.throw(errMessage)
+      ;(function () { validator(obj) }).should.throw(errMessage)
     })
   })
 
@@ -107,9 +107,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
+      var validator = osom(schema)
       var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({age: 25}) }).should.throw(errMessage)
     })
 
     it('based in a object key', function () {
@@ -124,9 +124,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
+      var validator = osom(schema)
       var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({age: 25}) }).should.throw(errMessage)
     })
 
     it('custom error message', function () {
@@ -142,9 +142,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var ardent = Ardent(schema)
+      var validator = osom(schema)
       var errMessage = 'expected a millenial instead of 25!'
-      ;(function () { ardent({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({age: 25}) }).should.throw(errMessage)
     })
   })
 })
@@ -165,7 +165,7 @@ describe('behavior', function () {
       transform: [trim]
     }
 
-    var ardent = Ardent(schema, globalFields)
-    ardent({age: '  23  '}).should.be.eql({age: '23'})
+    var validator = osom(schema, globalFields)
+    validator({age: '  23  '}).should.be.eql({age: '23'})
   })
 })

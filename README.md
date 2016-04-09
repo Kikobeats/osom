@@ -1,35 +1,35 @@
-# ardent
+# osom
 
-![Last version](https://img.shields.io/github/tag/Kikobeats/ardent.svg?style=flat-square)
-[![Build Status](http://img.shields.io/travis/Kikobeats/ardent/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/ardent)
-[![Dependency status](http://img.shields.io/david/Kikobeats/ardent.svg?style=flat-square)](https://david-dm.org/Kikobeats/ardent)
-[![Dev Dependencies Status](http://img.shields.io/david/dev/Kikobeats/ardent.svg?style=flat-square)](https://david-dm.org/Kikobeats/ardent#info=devDependencies)
-[![NPM Status](http://img.shields.io/npm/dm/ardent.svg?style=flat-square)](https://www.npmjs.org/package/ardent)
+![Last version](https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square)
+[![Build Status](http://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/osom)
+[![Dependency status](http://img.shields.io/david/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom)
+[![Dev Dependencies Status](http://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom#info=devDependencies)
+[![NPM Status](http://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-> Fancy Object Schema Modeling. Inspired in [Mongoose Schema](https://github.com/Automattic/mongoose#defining-a-model) but out of the box.
+> An Awesome [/osom/] Object Schema Modeling. Inspired in [Mongoose Schema](https://github.com/Automattic/mongoose#defining-a-model).
 
 ## Install
 
 ```bash
-$ npm install ardent --save
+$ npm install osom --save
 ```
 
 If you want to use in the browser (powered by [Browserify](http://browserify.org/)):
 
 ```bash
-$ bower install ardent --save
+$ bower install osom --save
 ```
 
 and later link in your HTML:
 
 ```html
-<script src="bower_components/ardent/dist/ardent.js"></script>
+<script src="bower_components/osom/dist/osom.js"></script>
 ```
 ## Usage
 
 ```js
-var Ardent = require('ardent')
+var osom = require('osom')
 
 function trim (str) {
   return str.trim()
@@ -45,15 +45,15 @@ var schema = {
 }
 
 // creating schema validation
-var ardent = Ardent(schema)
+var validator = osom(schema)
 
 // schema factory
-ardent({age: '  23  '}).should.be.eql({age: '23'})
+validator({age: '  23  '}).should.be.eql({age: '23'})
 ```
 
 ## API
 
-### ardent(schema, [options])
+### osom(schema, [options])
 
 #### schema
 
@@ -76,7 +76,7 @@ var basicSchema = {
 
 ##### Advanced
 
-The *basic* mode is a simplification of the *advanced* mode. 
+The *basic* mode is a simplification of the *advanced* mode.
 
 While in *basic* mode only is possible setup `type` casting, in *advanced* mode you can setup more things providing a configurable `object`.
 
@@ -90,7 +90,7 @@ The following keys setup your rule:
 function trim (str) {
   return str.trim()
 }
-    
+
 var advancedSchema = {
   age: {
     type: String,

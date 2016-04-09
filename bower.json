@@ -1,9 +1,9 @@
 {
-  "name": "ardent",
-  "description": "Fancy Object Schema Modeling. Inspired in Mongoose Schema defintion but out of box.",
-  "homepage": "https://github.com/Kikobeats/ardent",
+  "name": "osom",
+  "description": "An Awesome [/osom/] Object Schema Modeling",
+  "homepage": "https://github.com/Kikobeats/osom",
   "version": "1.0.0",
-  "main": "./dist/ardent.js",
+  "main": "./dist/osom.js",
   "authors": [
     {
       "email": "josefrancisco.verdu@gmail.com",
@@ -13,10 +13,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kikobeats/ardent.git"
+    "url": "git+https://github.com/kikobeats/osom.git"
   },
   "bugs": {
-    "url": "https://github.com/Kikobeats/ardent/issues"
+    "url": "https://github.com/Kikobeats/osom/issues"
   },
   "keywords": [
     "modeling",

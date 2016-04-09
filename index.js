@@ -45,8 +45,8 @@ function throwValidationError (name, value, desription) {
   throw new TypeError(msg)
 }
 
-function Ardent (schemaBlueprint, globalRules) {
-  if (!(this instanceof Ardent)) return new Ardent(schemaBlueprint, globalRules)
+function Osom (schemaBlueprint, globalRules) {
+  if (!(this instanceof Osom)) return new Osom(schemaBlueprint, globalRules)
   globalRules = globalRules || {}
 
   var schemaTypes = {}
@@ -61,7 +61,7 @@ function Ardent (schemaBlueprint, globalRules) {
     return schema
   }, {})
 
-  function ardent (obj) {
+  function osom (obj) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
@@ -92,7 +92,7 @@ function Ardent (schemaBlueprint, globalRules) {
     }, {})
   }
 
-  return ardent
+  return osom
 }
 
-module.exports = Ardent
+module.exports = Osom
