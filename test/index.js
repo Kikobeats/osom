@@ -137,13 +137,13 @@ describe('schema defintion', function () {
             validator: function (v) {
               return v === '23'
             },
-            message: 'expected a millenial instead of {VALUE}!'
+            message: 'expected a millenial value instead of {VALUE}!'
           }
         }
       }
 
       var validator = osom(schema)
-      var errMessage = 'expected a millenial instead of 25!'
+      var errMessage = 'expected a millenial value instead of 25!'
       ;(function () { validator({age: 25}) }).should.throw(errMessage)
     })
   })
