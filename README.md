@@ -7,7 +7,7 @@
 [![NPM Status](http://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-> An Awesome [/osom/] Object Schema Modeling. Inspired in [Mongoose Schema](https://github.com/Automattic/mongoose#defining-a-model).
+> An Awesome [/osom/] Object Schema Modeling. Inspired in [Mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
 
 ## Install
 
