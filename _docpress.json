@@ -206,6 +206,7 @@
   "sources": {
     "README.md": "index.html",
     "docs/docpress.json": "docpress.json",
+    "docs/main.css": "main.css",
     "docs/style.css": "style.css"
   }
 }
