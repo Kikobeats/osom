@@ -18,6 +18,7 @@ npm-debug.log
 *sublime*
 .DS_Store
 nbproject
+_docpress
 
 ############################
 # Tests

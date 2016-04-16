@@ -6,3 +6,24 @@ node_js:
   - "0.12"
   - "0.10"
   - "iojs"
+env:
+  - OSOM_DEPLOY_DOCS=true
+  - OSOM_DEPLOY_DOCS=false
+  - OSOM_DEPLOY_DOCS=false
+  - OSOM_DEPLOY_DOCS=false
+  - OSOM_DEPLOY_DOCS=false
+  - OSOM_DEPLOY_DOCS=false
+script:
+  - npm test
+  - ./node_modules/.bin/docpress build || exit 0
+after_success:
+  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$OSOM_DEPLOY_DOCS" = "true" ]; then ./node_modules/.bin/git-update-ghpages -e; fi
+cache:
+  directories:
+    - node_modules
+env:
+  global:
+    - GIT_NAME: Travis CI
+    - GIT_EMAIL: nobody@nobody.org
+    - GITHUB_REPO: Kikobeats/osom
+    - GIT_SOURCE: _docpress

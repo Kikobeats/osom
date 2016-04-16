@@ -1,21 +1,24 @@
 # osom
 
+<!-- {.massive-header.-with-tagline} -->
+
+> An Awesome [/osom/] Object Schema Modeling. Inspired in [mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
+
 ![Last version](https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square)
-[![Build Status](http://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/osom)
-[![Dependency status](http://img.shields.io/david/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom)
-[![Dev Dependencies Status](http://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom#info=devDependencies)
-[![NPM Status](http://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
+[![Build Status](https://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/osom)
+[![Dependency status](https://img.shields.io/david/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom)
+[![Dev Dependencies Status](https://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom#info=devDependencies)
+[![NPM Status](https://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-> An Awesome [/osom/] Object Schema Modeling. Inspired in [Mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
 
-## Install
+## Installation
 
 ```bash
 $ npm install osom --save
 ```
 
-If you want to use in the browser (powered by [Browserify](http://browserify.org/)):
+If you want to use in the browser (powered by [Browserify](https://browserify.org/)):
 
 ```bash
 $ bower install osom --save
@@ -26,7 +29,7 @@ and later link in your HTML:
 ```html
 <script src="bower_components/osom/dist/osom.js"></script>
 ```
-## Usage
+## Preview
 
 ```js
 var osom = require('osom')
@@ -35,58 +38,79 @@ function trim (str) {
   return str.trim()
 }
 
-// setup your schema
-var schema = {
-  age: {
-    type: String,
-    default: '23',
-    filter: [trim]
-  }
+function isValidTitle (str) {
+  return str.length > 0
 }
 
-// creating schema validation
+// setup your schema
+var schema = osom({
+  title: {
+    type: String,
+    validate: isValidTitle,
+    transform: [trim]
+  },
+  category: String,
+  type: String,
+  source: String,
+  link: String,
+  createdAt: String,
+  updatedAt: String
+})
+
+function trim (str) {
+  return str.trim()
+}
+
+// create validator based on schemas
 var validator = osom(schema)
 
-// schema factory
+// validate it!
 validator({age: '  23  '}) // => {age: '23'}
 ```
 
-## API
+## Usage
 
-### osom(schema, [global])
+osom(schema, [global])
+<!-- {.font-large} -->
 
-#### schema
+where:
 
-*Required*<br>
-Type: `object`
+- `schema`: It represents a set of rules (one per each key) that will be used for validate an object.
+- `global` (optional): It brings you the possibility to declare global rules definition as helper to avoid write repetitive code.
 
-Created a Factory for validate a schema based in a set of rules.
+After that, you will have a validator `function` that you can invoke passing the object to be validate.
 
-Rules are setup following two approach
+## Schema
 
-##### Basic
+### Simple
 
-Just provide `key/value` pair per rule, where `key` is the name of the rule and `value` the type casting result:
+The most common use case is validate the `type` of something.
+
+If you are only interested in the `type`, you can provide a simple schema like:
 
 ```js
-var basicSchema = {
+var simpleSchema = {
   age: Number
 }
 ```
 
-##### Advanced
+Where `key` is the name of the rule and `value` the `type` of it.
 
-The *basic* mode is a simplification of the *advanced* mode.
+### Advanced
 
-While in *basic* mode only is possible setup `type` casting, in *advanced* mode you can setup more things providing a configurable `object`.
+The *basic* mode is a simplification of the *advanced* mode for the most common use case.
 
-The following keys setup your rule:
+While in *basic* mode only is possible setup `type`, in *advanced* mode you can setup more things providing a configurable `object`.
 
-###### type
+Each key of the object represent a **rule** . It's possible setup different things in the same rule.
+
+## Defining Rules
+
+### type
 
 Type: `function`
 
-As in *basic* mode, it specifies the type casting of the output value:
+As in *basic* mode, it specifies the `type of the output value:
 
 ```js
 var schema = {
@@ -99,15 +123,23 @@ var schema = {
 Internally it uses [chaste](https://github.com/Kikobeats/chaste). This makes easy casting compatible types:
 
 ```js
-osom(schema)({age: '23'}) // => {age: 23}
+var schema = {
+  age: {
+    type: Number
+  }
+}
+
+var validator = osom(schema)
+validator({age: '23'}) // => {age: 23}
 ```
 
-###### casting
+### casting
 
 Type: `boolean`<br>
 Default: `true`
 
-It disables type casting and throws `TypeError` if the `typeof` of the value evaluation is not correct:
+It enable/disable type casting.
+An `TypeError` will be throwed under different `type` evaluation.
 
 ```js
 var schema = {
@@ -117,35 +149,39 @@ var schema = {
   }
 }
 
-osom(schema)({age: '23'}) // => TypeError("Expected a {string} for 'age'.")
+var validator = osom(schema)
+validator({age: '23'}) // => TypeError("Expected a {string} for 'age'.")
 ```
 
-###### required
+### required
 
 Type: `boolean`|`array`<br>
 Default: `false`
 
 It marks a rule as required field and throws `TypeError` if value for the field is not present.
 
-If you want to provide a custom error message, provide an `Array` where the second element represent the message:
+Additionally is possible provide a custom error message. For do it, pass an `Array` as value where the second element represent the error message.
 
 ```js
 var schema = {
   age: {
     type: String,
-    required: [true, 'your message here']
+    required: [true, 'sorry but you must provide an age.']
   }
 }
+
+var validator = osom(schema)
+validator({}) // => TypeError("sorry but you must provide an age")
 ```
 
-###### default
+### default
 
 Type: `whatever`|`function`<br>
 Default: `null`
 
 It sets a default value if `nill` value as input is provided.
 
-Additionally you can provide a `Function` for set a dynamic value:
+Additionally you can provide a `function` for set a dynamic value:
 
 ```js
 var schema = {
@@ -153,14 +189,19 @@ var schema = {
     type: Number, default: function () { return 23 }
   }
 }
+
+var validator = osom(schema)
+validator({}) // => { age: 23 }
 ```
 
-###### transform
+### transform
 
 Type: `array`<br>
 Default: `[]`
 
-An `Array` collection of data transforms as pipeline of methods to apply for the input value:
+It transforms the input value.
+
+The Methods provided in the `array` are applied as pipeline (the input of the second is the output of the first).
 
 ```js
 function trim (str) {
@@ -173,14 +214,18 @@ var schema = {
     transform: [trim]
   }
 }
+
+var validator = osom(schema)
+validator({age: '    23   '}) // => { age: '23' }
 ```
 
-###### validate
+### validate
 
 Type: `function`|`object`<br>
 Default: `null`
 
-It setup a `Function` that will be exec to validate the input value and if it fails, it throws `TypeError`.
+It set up a `function` that will be exec to validate the input value.
+If it fails, it throws `TypeError`.
 
 ```js
 var schema = {
@@ -192,11 +237,11 @@ var schema = {
   }
 }
 
-osom(schema)({age: 25}) // => TypeError("Fail '25' validation for 'age'.")
+var validator = osom(schema)
+validator({age: 25}) // => TypeError("Fail '25' validation for 'age'.")
 ```
 
 Providing a object brings you the possibility set up a custom error message:
-
 
 ```js
 var schema = {
@@ -211,15 +256,15 @@ var schema = {
   }
 }
 
-osom(schema)({age: 25}) // => TypeError("expected a millenial value instead of 25!")
+var validator = osom(schema)
+validator({age: 25}) // => TypeError("expected a millenial value instead of 25!")
 ```
 
-#### global
+## Defining Global Rules
 
-Type: `object`<br>
-Default: `{}`
+While is possible provide specific setup per each rule, also is possible provide them as global to apply to all rules.
 
-Meanwhile is possible provide specific options per each rule, also is possible provide them as global to apply to all rule. This minimizes the schemas definitions:
+This minimizes the schemas definitions.
 
 ```js
 function trim (str) {
@@ -240,6 +285,70 @@ var validator = osom(schema, globalFields)
 validator({age: '  23  '}) // => {age: '23'}
 ```
 
+No problem if later you need to avoid it for a specific case.
+
+```js
+function trim (str) {
+  return str.trim()
+}
+
+var schema = {
+  age: {
+    type: String,
+    transform: []
+  }
+}
+
+var globalFields = {
+  transform: [trim]
+}
+
+var validator = osom(schema, globalFields)
+validator({age: '  23  '}) // => {age: '  23  '}
+```
+
+## Tips
+
+### Working with async code
+
+This library works synchronously.
+
+However, you can use it comfortably in a async workflow transforming the interface into a callback/promise style.
+
+For example, consider use [async#asyncify](https://github.com/caolan/async#asyncify) for do it. we could have a `schema.js` file like:
+
+```js
+var schema = osom({
+  title: {
+    type: String,
+    validate: isValidTitle,
+    transform: [trim]
+  },
+  category: String,
+  type: String,
+  source: String,
+  link: String,
+  createdAt: String,
+  updatedAt: String
+})
+
+
+module.exports = async.asyncify(schema)
+module.exports.sync = schema
+```
+
+Then you only need use it into a async workflow:
+
+```js
+var schema = require('./schema')
+schema(data, function (validationError, instance) {
+  /** do something */
+})
+```
+
+Be careful: this transformation doesn't mean that the function works now asynchronously; Just is converting
+`try-catch` interface into `callback(err, data)`.
+
 ## License
 
-MIT © [Kiko Beats](http://kikobeats.com)
+MIT © [Kiko Beats](https://kikobeats.com)
