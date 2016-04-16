@@ -1,17 +1,5 @@
-html .markdown-body a {
-  color: #880000;
-}
-
-#osom,
-html .toc-menu .link.-active,
-html .toc-menu .hlink.-active,
-html .markdown-body h2,
-html .markdown-body h1 {
+.toc-menu .-level-1:first-child > .title {
   color: #B9AB61;
-}
-
-html .toc-menu .link.-active, html .toc-menu .hlink.-active{
-  box-shadow: inset -2px 0 #B9AB61;
 }
 
 .font-large {
