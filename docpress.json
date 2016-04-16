@@ -1,0 +1,13 @@
+{
+  "github": "kikobeats/osom",
+  "css": [
+    "http://ricostacruz.com/docpress-rsc/style.css",
+    "style.css"
+  ],
+  "markdown": {
+    "typographer": true,
+    "plugins": {
+      "decorate": true
+    }
+  }
+}

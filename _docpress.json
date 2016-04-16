@@ -1,0 +1,211 @@
+{
+  "toc": {
+    "sections": [
+      {
+        "title": "osom",
+        "source": "README.md",
+        "expand": true,
+        "url": "index.html",
+        "slug": "index",
+        "headings": [
+          {
+            "title": "Installation",
+            "depth": 2,
+            "id": "installation"
+          },
+          {
+            "title": "Preview",
+            "depth": 2,
+            "id": "preview"
+          },
+          {
+            "title": "Usage",
+            "depth": 2,
+            "id": "usage"
+          },
+          {
+            "title": "Schema",
+            "depth": 2,
+            "id": "schema",
+            "headings": [
+              {
+                "title": "Simple",
+                "depth": 3,
+                "id": "simple"
+              },
+              {
+                "title": "Advanced",
+                "depth": 3,
+                "id": "advanced"
+              }
+            ]
+          },
+          {
+            "title": "Defining Rules",
+            "depth": 2,
+            "id": "defining-rules",
+            "headings": [
+              {
+                "title": "type",
+                "depth": 3,
+                "id": "type"
+              },
+              {
+                "title": "casting",
+                "depth": 3,
+                "id": "casting"
+              },
+              {
+                "title": "required",
+                "depth": 3,
+                "id": "required"
+              },
+              {
+                "title": "default",
+                "depth": 3,
+                "id": "default"
+              },
+              {
+                "title": "transform",
+                "depth": 3,
+                "id": "transform"
+              },
+              {
+                "title": "validate",
+                "depth": 3,
+                "id": "validate"
+              }
+            ]
+          },
+          {
+            "title": "Defining Global Rules",
+            "depth": 2,
+            "id": "defining-global-rules"
+          },
+          {
+            "title": "Tips",
+            "depth": 2,
+            "id": "tips",
+            "headings": [
+              {
+                "title": "Working with async code",
+                "depth": 3,
+                "id": "working-with-async-code"
+              }
+            ]
+          },
+          {
+            "title": "License",
+            "depth": 2,
+            "id": "license"
+          }
+        ]
+      }
+    ]
+  },
+  "index": {
+    "index.html": {
+      "source": "README.md",
+      "title": "osom",
+      "slug": "index",
+      "headings": [
+        {
+          "title": "Installation",
+          "depth": 2,
+          "id": "installation"
+        },
+        {
+          "title": "Preview",
+          "depth": 2,
+          "id": "preview"
+        },
+        {
+          "title": "Usage",
+          "depth": 2,
+          "id": "usage"
+        },
+        {
+          "title": "Schema",
+          "depth": 2,
+          "id": "schema",
+          "headings": [
+            {
+              "title": "Simple",
+              "depth": 3,
+              "id": "simple"
+            },
+            {
+              "title": "Advanced",
+              "depth": 3,
+              "id": "advanced"
+            }
+          ]
+        },
+        {
+          "title": "Defining Rules",
+          "depth": 2,
+          "id": "defining-rules",
+          "headings": [
+            {
+              "title": "type",
+              "depth": 3,
+              "id": "type"
+            },
+            {
+              "title": "casting",
+              "depth": 3,
+              "id": "casting"
+            },
+            {
+              "title": "required",
+              "depth": 3,
+              "id": "required"
+            },
+            {
+              "title": "default",
+              "depth": 3,
+              "id": "default"
+            },
+            {
+              "title": "transform",
+              "depth": 3,
+              "id": "transform"
+            },
+            {
+              "title": "validate",
+              "depth": 3,
+              "id": "validate"
+            }
+          ]
+        },
+        {
+          "title": "Defining Global Rules",
+          "depth": 2,
+          "id": "defining-global-rules"
+        },
+        {
+          "title": "Tips",
+          "depth": 2,
+          "id": "tips",
+          "headings": [
+            {
+              "title": "Working with async code",
+              "depth": 3,
+              "id": "working-with-async-code"
+            }
+          ]
+        },
+        {
+          "title": "License",
+          "depth": 2,
+          "id": "license"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "README.md": "index.html",
+    "docs/docpress.json": "docpress.json",
+    "docs/style.css": "style.css"
+  }
+}

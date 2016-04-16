@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=a44c9e9d">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
+    <link rel="stylesheet" href="style.css?t=452ba7b8">
+    <script src="assets/script.js?t=2bcc4b59"></script>
+    <title>osom</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="body page-index">
+        <div class="header-nav">
+          <div class="right"><a href="https://github.com/kikobeats/osom" data-title="kikobeats/osom" class="iconlink">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 class="massive-header -with-tagline" id="osom">osom</h1>
+<blockquote>
+<p>An Awesome [/osom/] Object Schema Modeling. Inspired in <a href="https://github.com/Automattic/mongoose#defining-a-model">mongoose </a> but Database Agnostic.</p>
+</blockquote>
+<p><img src="https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square" alt="Last version">
+<a href="https://travis-ci.org/Kikobeats/osom"><img src="http://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square" alt="Build Status"></a>
+<a href="https://david-dm.org/Kikobeats/osom"><img src="http://img.shields.io/david/Kikobeats/osom.svg?style=flat-square" alt="Dependency status"></a>
+<a href="https://david-dm.org/Kikobeats/osom#info=devDependencies"><img src="http://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square" alt="Dev Dependencies Status"></a>
+<a href="https://www.npmjs.org/package/osom"><img src="http://img.shields.io/npm/dm/osom.svg?style=flat-square" alt="NPM Status"></a>
+<a href="https://paypal.me/Kikobeats"><img src="https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square" alt="Donate"></a></p>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-bash">$ npm install osom --save
+</code></pre>
+<p>If you want to use in the browser (powered by <a href="http://browserify.org/">Browserify</a>):</p>
+<pre><code class="lang-bash">$ bower install osom --save
+</code></pre>
+<p>and later link in your HTML:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="pl-s">&quot;bower_components/osom/dist/osom.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<h2 id="preview">Preview</h2>
+<pre><code class="lang-js"><span class="pl-k">var</span> osom = <span class="pl-c1">require</span>(<span class="pl-s">&apos;osom&apos;</span>)
+
+<span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.trim()
+}
+
+<span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">isValidTitle</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.length &gt; <span class="hljs-number">0</span>
+}
+
+<span class="pl-c">// setup your schema</span>
+<span class="pl-k">var</span> schema = osom({
+  title: {
+    type: <span class="pl-c1">String</span>,
+    validate: isValidTitle,
+    transform: [trim]
+  },
+  category: <span class="pl-c1">String</span>,
+  type: <span class="pl-c1">String</span>,
+  source: <span class="pl-c1">String</span>,
+  link: <span class="pl-c1">String</span>,
+  createdAt: <span class="pl-c1">String</span>,
+  updatedAt: <span class="pl-c1">String</span>
+})
+
+<span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.trim()
+}
+
+<span class="pl-c">// create validator based on schemas</span>
+<span class="pl-k">var</span> validator = osom(schema)
+
+<span class="pl-c">// validate it!</span>
+validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p class="font-large">osom(schema, [global])</p>
+<p>where:</p>
+<ul>
+<li><code>schema</code>: It represents a set of rules (one per each key) that will be used for validate an object.</li>
+<li><code>global</code> (optional): It brings you the possibility to declare global rules definition as helper to avoid write repetitive code.</li>
+</ul>
+<p>After that, you will have a validator <code>function</code> that you can invoke passing the object to be validate.</p>
+<h2 id="schema">Schema</h2>
+<h3 id="simple">Simple</h3>
+<p>The most common use case is validate the <code>type</code> of something.</p>
+<p>If you are only interested in the <code>type</code>, you can provide a simple schema like:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> simpleSchema = {
+  age: <span class="pl-c1">Number</span>
+}
+</code></pre>
+<p>Where <code>key</code> is the name of the rule and <code>value</code> the <code>type</code> of it.</p>
+<h3 id="advanced">Advanced</h3>
+<p>The <em>basic</em> mode is a simplification of the <em>advanced</em> mode for the most common use case.</p>
+<p>While in <em>basic</em> mode only is possible setup <code>type</code>, in <em>advanced</em> mode you can setup more things providing a configurable <code>object</code>.</p>
+<p>Each key of the object represent a <strong>rule</strong> . It&#x2019;s possible setup different things in the same rule.</p>
+<h2 id="defining-rules">Defining Rules</h2>
+<h3 id="type">type</h3>
+<p>Type: <code>function</code></p>
+<p>As in <em>basic</em> mode, it specifies the `type of the output value:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">Number</span>
+  }
+}
+</code></pre>
+<p>Internally it uses <a href="https://github.com/Kikobeats/chaste">chaste</a>. This makes easy casting compatible types:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">Number</span>
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({age: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; {age: 23}</span>
+</code></pre>
+<h3 id="casting">casting</h3>
+<p>Type: <code>boolean</code><br>
+Default: <code>true</code></p>
+<p>It enable/disable type casting.
+An <code>TypeError</code> will be throwed under different <code>type</code> evaluation.</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    casting: <span class="pl-c1">false</span>
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({age: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Expected a {string} for &apos;age&apos;.&quot;)</span>
+</code></pre>
+<h3 id="required">required</h3>
+<p>Type: <code>boolean</code>|<code>array</code><br>
+Default: <code>false</code></p>
+<p>It marks a rule as required field and throws <code>TypeError</code> if value for the field is not present.</p>
+<p>Additionally is possible provide a custom error message. For do it, pass an <code>Array</code> as value where the second element represent the error message.</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    required: [<span class="pl-c1">true</span>, <span class="pl-s">&apos;sorry but you must provide an age.&apos;</span>]
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({}) <span class="pl-c">// =&gt; TypeError(&quot;sorry but you must provide an age&quot;)</span>
+</code></pre>
+<h3 id="default">default</h3>
+<p>Type: <code>whatever</code>|<code>function</code><br>
+Default: <code>null</code></p>
+<p>It sets a default value if <code>nill</code> value as input is provided.</p>
+<p>Additionally you can provide a <code>function</code> for set a dynamic value:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">Number</span>, <span class="pl-k">default</span>: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ <span class="pl-k">return</span> <span class="hljs-number">23</span> }
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({}) <span class="pl-c">// =&gt; { age: 23 }</span>
+</code></pre>
+<h3 id="transform">transform</h3>
+<p>Type: <code>array</code><br>
+Default: <code>[]</code></p>
+<p>It transforms the input value.</p>
+<p>The Methods provided in the <code>array</code> are applied as pipeline (the input of the second is the output of the first).</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.trim()
+}
+
+<span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    transform: [trim]
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({age: <span class="pl-s">&apos;    23   &apos;</span>}) <span class="pl-c">// =&gt; { age: &apos;23&apos; }</span>
+</code></pre>
+<h3 id="validate">validate</h3>
+<p>Type: <code>function</code>|<code>object</code><br>
+Default: <code>null</code></p>
+<p>It set up a <code>function</code> that will be exec to validate the input value.
+If it fails, it throws <code>TypeError</code>.</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    validate: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
+      <span class="pl-k">return</span> v === <span class="pl-s">&apos;23&apos;</span>
+    }
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({age: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Fail &apos;25&apos; validation for &apos;age&apos;.&quot;)</span>
+</code></pre>
+<p>Providing a object brings you the possibility set up a custom error message:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    validate: {
+      validator: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
+        <span class="pl-k">return</span> v === <span class="pl-s">&apos;23&apos;</span>
+      },
+      message: <span class="pl-s">&apos;expected a millenial value instead of {VALUE}!&apos;</span>
+    }
+  }
+}
+
+<span class="pl-k">var</span> validator = osom(schema)
+validator({age: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;expected a millenial value instead of 25!&quot;)</span>
+</code></pre>
+<h2 id="defining-global-rules">Defining Global Rules</h2>
+<p>While is possible provide specific setup per each rule, also is possible provide them as global to apply to all rules.</p>
+<p>This minimizes the schemas definitions.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.trim()
+}
+
+<span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>
+  }
+}
+
+<span class="pl-k">var</span> globalFields = {
+  transform: [trim]
+}
+
+<span class="pl-k">var</span> validator = osom(schema, globalFields)
+validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
+</code></pre>
+<p>No problem if later you need to avoid it for a specific case.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
+  <span class="pl-k">return</span> str.trim()
+}
+
+<span class="pl-k">var</span> schema = {
+  age: {
+    type: <span class="pl-c1">String</span>,
+    transform: []
+  }
+}
+
+<span class="pl-k">var</span> globalFields = {
+  transform: [trim]
+}
+
+<span class="pl-k">var</span> validator = osom(schema, globalFields)
+validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;  23  &apos;}</span>
+</code></pre>
+<h2 id="tips">Tips</h2>
+<h3 id="working-with-async-code">Working with async code</h3>
+<p>This library works synchronously.</p>
+<p>However, you can use it comfortably in a async workflow transforming the interface into a callback/promise style.</p>
+<p>For example, consider use <a href="https://github.com/caolan/async#asyncify">async#asyncify</a> for do it. we could have a <code>schema.js</code> file like:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = osom({
+  title: {
+    type: <span class="pl-c1">String</span>,
+    validate: isValidTitle,
+    transform: [trim]
+  },
+  category: <span class="pl-c1">String</span>,
+  type: <span class="pl-c1">String</span>,
+  source: <span class="pl-c1">String</span>,
+  link: <span class="pl-c1">String</span>,
+  createdAt: <span class="pl-c1">String</span>,
+  updatedAt: <span class="pl-c1">String</span>
+})
+
+
+<span class="pl-c1">module</span>.exports = <span class="pl-k">async</span>.asyncify(schema)
+<span class="pl-c1">module</span>.exports.sync = schema
+</code></pre>
+<p>Then you only need use it into a async workflow:</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> schema = <span class="pl-c1">require</span>(<span class="pl-s">&apos;./schema&apos;</span>)
+schema(data, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">validationError, instance</span>) </span>{
+  <span class="pl-c">/** do something */</span>
+})
+</code></pre>
+<p>Be careful: this transformation doesn&#x2019;t mean that the function works now asynchronously; Just is converting
+<code>try-catch</code> interface into <code>callback(err, data)</code>.</p>
+<h2 id="license">License</h2>
+<p>MIT &#xA9; <a href="http://kikobeats.com">Kiko Beats</a></p>
+
+        </div>
+      </div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a href="index.html" class="link title -active link-index">osom</a>
+            </li>
+            <li class="menu-item -level-1"><a href="#installation" class="link title link-installation">Installation</a>
+            </li>
+            <li class="menu-item -level-1"><a href="#preview" class="link title link-preview">Preview</a>
+            </li>
+            <li class="menu-item -level-1"><a href="#usage" class="link title link-usage">Usage</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a href="#schema" class="link title link-schema">Schema</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="#simple" class="link title link-simple">Simple</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#advanced" class="link title link-advanced">Advanced</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><a href="#defining-rules" class="link title link-defining-rules">Defining Rules</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="#type" class="link title link-type">type</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#casting" class="link title link-casting">casting</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#required" class="link title link-required">required</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#default" class="link title link-default">default</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#transform" class="link title link-transform">transform</a>
+                </li>
+                <li class="menu-item -level-2"><a href="#validate" class="link title link-validate">validate</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1"><a href="#defining-global-rules" class="link title link-defining-global-rules">Defining Global Rules</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a href="#tips" class="link title link-tips">Tips</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="#working-with-async-code" class="link title link-working-with-async-code">Working with async code</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1"><a href="#license" class="link title link-license">License</a>
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
+  </body>
+</html>
