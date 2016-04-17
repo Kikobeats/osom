@@ -1,8 +1,8 @@
 {
   "github": "kikobeats/osom",
   "css": [
-    "https://cdn.rawgit.com/Kikobeats/osom/master/docs/main.css",
-    "https://cdn.rawgit.com/Kikobeats/osom/master/docs/style.css"
+    "main.css",
+    "style.css"
   ],
   "markdown": {
     "typographer": true,
