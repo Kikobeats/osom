@@ -27,7 +27,7 @@
     "lodash.isarray": "~4.0.0",
     "lodash.isfunction": "~3.0.8",
     "lodash.isstring": "~4.0.1",
-    "lodash.merge": "~4.3.4",
+    "lodash.merge": "~4.4.0",
     "lodash.reduce": "~4.4.0"
   },
   "devDependencies": {
