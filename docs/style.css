@@ -1,5 +1,15 @@
-.toc-menu .-level-1:first-child > .title {
-  color: #B9AB61;
+// html,
+// .-menu-visible .menu-toggle {
+//   background-color: #ecf0f1;
+// }
+
+.toc-menu .-level-1:first-child > .title,
+.toc-menu .-level-1.-parent > .title {
+  color: #3a506b;
+}
+
+.markdown-body h3 {
+  color: #1c2541;
 }
 
 .font-large {

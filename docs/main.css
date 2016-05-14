@@ -60,7 +60,7 @@ html .markdown-body {
 
 html .markdown-body a {
   font-weight: bold;
-  color: #880000 /*accent*/;
+  color: #5bc0be /*accent*/;
 }
 
 /*
@@ -96,13 +96,13 @@ html .markdown-body h2 {
   font-family: source sans pro, sans-serif;
   font-weight: 300;
   font-size: 2em;
-  color: #B9AB61 /*accent2*/;
+  color: #3a506b /*accent2*/;
 }
 
 html .markdown-body h1 {
   font-family: source sans pro, sans-serif;
   font-weight: 300;
-  color: #B9AB61 /*accent2*/;
+  color: #3a506b /*accent2*/;
   margin-bottom: .6em;
   padding-bottom: .6em;
   border-bottom: solid 1px #eee;
@@ -127,7 +127,7 @@ html .markdown-body h4 {
     font-size: 5em;
     font-family: source sans pro, sans-serif;
     font-weight: 200;
-    color: #B9AB61 /*accent2*/;
+    color: #3a506b /*accent2*/;
     line-height: 1.2;
   }
 
@@ -185,16 +185,16 @@ html a[href='http://git.io/col'] img {
  */
 
 html #nprogress .bar {
-  background: #880000 /*accent*/;
+  background: #5bc0be /*accent*/;
 }
 
 html #nprogress .peg {
-  box-shadow: 0 0 10px #880000 /*accent*/, 0 0 5px #880000 /*accent*/;
+  box-shadow: 0 0 10px #5bc0be /*accent*/, 0 0 5px #5bc0be /*accent*/;
 }
 
 html #nprogress .spinner-icon {
-  border-top-color: #880000 /*accent*/;
-  border-left-color: #880000 /*accent*/;
+  border-top-color: #5bc0be /*accent*/;
+  border-left-color: #5bc0be /*accent*/;
 }
 
 html .header-nav .iconlink:hover,
@@ -203,7 +203,7 @@ html .footer-nav .left a:hover:before,
 html .footer-nav .right a:hover:after,
 html .footer-nav a:hover .title,
 html .menu-toggle .hover {
-  color: #880000 /*accent*/;
+  color: #5bc0be /*accent*/;
 }
 
 html .toc-menu .link,
@@ -213,7 +213,7 @@ html .toc-menu .hlink {
 
 html .toc-menu .link.-active,
 html .toc-menu .hlink.-active {
-  box-shadow: inset -2px 0 #880000 /*accent*/;
+  box-shadow: inset -2px 0 #5bc0be /*accent*/;
 }
 
 /*
@@ -245,12 +245,12 @@ html .markdown-body .pull-box:before {
   font-weight: 400;
   /* @include ion-icon('ios-checkmark-outline', 32px); */
   vertical-align: middle;
-  color: #880000 /*accent*/;
+  color: #5bc0be /*accent*/;
   margin-right: 16px;
 }
 
 html .markdown-body .pull-box a {
-  border: solid 1px #880000 /*accent*/;
+  border: solid 1px #5bc0be /*accent*/;
   border-radius: 4px;
   padding: 5px 12px;
   text-transform: uppercase;
@@ -261,7 +261,7 @@ html .markdown-body .pull-box a {
 
 html .markdown-body .pull-box a:hover {
   text-decoration: none;
-  background: #880000 /*accent*/;
+  background: #5bc0be /*accent*/;
   color: white;
 }
 
