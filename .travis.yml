@@ -7,9 +7,9 @@ node_js:
   - "0.10"
   - "iojs"
 env:
+  - OSOM_DEPLOY_DOCS=false
+  - OSOM_DEPLOY_DOCS=false
   - OSOM_DEPLOY_DOCS=true
-  - OSOM_DEPLOY_DOCS=false
-  - OSOM_DEPLOY_DOCS=false
   - OSOM_DEPLOY_DOCS=false
   - OSOM_DEPLOY_DOCS=false
   - OSOM_DEPLOY_DOCS=false
