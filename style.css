@@ -1,17 +1,15 @@
-html .markdown-body a {
-  color: #880000;
+// html,
+// .-menu-visible .menu-toggle {
+//   background-color: #ecf0f1;
+// }
+
+.toc-menu .-level-1:first-child > .title,
+.toc-menu .-level-1.-parent > .title {
+  color: #3a506b;
 }
 
-#osom,
-html .toc-menu .link.-active,
-html .toc-menu .hlink.-active,
-html .markdown-body h2,
-html .markdown-body h1 {
-  color: #B9AB61;
-}
-
-html .toc-menu .link.-active, html .toc-menu .hlink.-active{
-  box-shadow: inset -2px 0 #B9AB61;
+.markdown-body h3 {
+  color: #1c2541;
 }
 
 .font-large {
