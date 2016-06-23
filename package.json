@@ -44,6 +44,7 @@
     "mocha": "latest",
     "should": "latest",
     "standard": "latest",
+    "travis-after-all": "latest",
     "vinyl-buffer": "latest",
     "vinyl-source-stream": "latest"
   },
