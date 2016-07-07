@@ -70,9 +70,6 @@ function Osom (schemaBlueprint, globalRules) {
       var value
       if (rule.casting && hasValue) value = rule.type(obj[name])
       else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
-      // else {
-      //   value = obj[name]
-      // }
 
       // lodash.flow is buggy, this is a workaround (and dep-free)
       value = reduce(rule.transform, function (acc, fn) {
