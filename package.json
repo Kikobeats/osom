@@ -31,24 +31,15 @@
     "type-detect": "~2.0.1"
   },
   "devDependencies": {
-    "browserify": "latest",
-    "coffee-script": "latest",
-    "coffeeify": "latest",
     "coveralls": "latest",
     "nyc": "latest",
     "docpress": "latest",
     "git-dirty": "latest",
     "git-update-ghpages": "latest",
-    "gulp": "latest",
-    "gulp-header": "latest",
-    "gulp-uglify": "latest",
-    "gulp-util": "latest",
     "mocha": "latest",
     "should": "latest",
     "standard": "latest",
     "travis-after-all": "latest",
-    "vinyl-buffer": "latest",
-    "vinyl-source-stream": "latest"
   },
   "engines": {
     "node": ">= 0.10"

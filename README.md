@@ -12,24 +12,12 @@
 [![NPM Status](https://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-
 ## Installation
 
 ```bash
 $ npm install osom --save
 ```
 
-If you want to use in the browser (powered by [Browserify](https://browserify.org/)):
-
-```bash
-$ bower install osom --save
-```
-
-and later link in your HTML:
-
-```html
-<script src="bower_components/osom/dist/osom.js"></script>
-```
 ## Preview
 
 ```js
