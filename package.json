@@ -32,24 +32,24 @@
   },
   "devDependencies": {
     "coveralls": "latest",
-    "nyc": "latest",
     "docpress": "latest",
     "git-dirty": "latest",
     "git-update-ghpages": "latest",
     "mocha": "latest",
+    "nyc": "latest",
     "should": "latest",
     "standard": "latest",
-    "travis-after-all": "latest",
+    "travis-after-all": "latest"
   },
   "engines": {
     "node": ">= 0.10"
   },
   "scripts": {
     "clean": "rm -rf node_modules",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard lib",
     "pretest": "npm run lint",
-    "test": "nyc mocha",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "test": "nyc mocha"
   },
   "license": "MIT"
 }
