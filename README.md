@@ -176,7 +176,7 @@ validator({}) // => TypeError("sorry but you must provide an age")
 
 ### default
 
-Type: `whatever`|`function`<br>
+Type: `string`|`object`|`number`|`boolean`|`function`<br>
 Default: `null`
 
 It sets a default value if `nill` value as input is provided.
