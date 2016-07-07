@@ -1,3 +1,11 @@
+<a name="1.1.2"></a>
+## 1.1.2 (2016-07-07)
+
+* Remove unnecessary devDep ([dd08970](https://github.com/kikobeats/osom/commit/dd08970))
+* Update style ([e924074](https://github.com/kikobeats/osom/commit/e924074))
+
+
+
 <a name="1.1.1"></a>
 ## 1.1.1 (2016-07-07)
 
