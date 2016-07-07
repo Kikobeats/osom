@@ -3,7 +3,7 @@
   "description": "An Awesome [/osom/] Object Schema Modeling",
   "homepage": "https://github.com/Kikobeats/osom",
   "version": "1.1.0",
-  "main": "./index.js",
+  "main": "index.js",
   "author": {
     "name": "Kiko Beats",
     "email": "josefrancisco.verdu@gmail.com",
@@ -34,6 +34,8 @@
     "browserify": "latest",
     "coffee-script": "latest",
     "coffeeify": "latest",
+    "coveralls": "latest",
+    "nyc": "latest",
     "docpress": "latest",
     "git-dirty": "latest",
     "git-update-ghpages": "latest",
@@ -55,7 +57,8 @@
     "clean": "rm -rf node_modules",
     "lint": "standard lib",
     "pretest": "npm run lint",
-    "test": "mocha"
+    "test": "nyc mocha",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "license": "MIT"
 }

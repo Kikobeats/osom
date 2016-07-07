@@ -14,6 +14,7 @@ env:
     - GITHUB_REPO: Kikobeats/osom
     - GIT_SOURCE: _docpress
 
+after_success: npm run coveralls
 after_script:
   - |
       declare exitCode;

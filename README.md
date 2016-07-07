@@ -6,6 +6,7 @@
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/osom)
+[![Coverage Status](https://img.shields.io/coveralls/Kikobeats/osom.svg?style=flat-square)](https://coveralls.io/github/Kikobeats/osom)
 [![Dependency status](https://img.shields.io/david/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom)
 [![Dev Dependencies Status](https://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square)](https://david-dm.org/Kikobeats/osom#info=devDependencies)
 [![NPM Status](https://img.shields.io/npm/dm/osom.svg?style=flat-square)](https://www.npmjs.org/package/osom)
