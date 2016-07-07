@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="assets/style.css?t=a44c9e9d">
     <link rel="stylesheet" href="main.css?t=ea99e8f2">
     <link rel="stylesheet" href="style.css?t=68d67a2b">
-    <script src="assets/script.js?t=2bcc4b59"></script>
+    <script src="assets/script.js?t=820b7ffa"></script>
     <title>osom</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -24,18 +24,13 @@
 </blockquote>
 <p><img src="https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square" alt="Last version">
 <a href="https://travis-ci.org/Kikobeats/osom"><img src="https://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square" alt="Build Status"></a>
+<a href="https://coveralls.io/github/Kikobeats/osom"><img src="https://img.shields.io/coveralls/Kikobeats/osom.svg?style=flat-square" alt="Coverage Status"></a>
 <a href="https://david-dm.org/Kikobeats/osom"><img src="https://img.shields.io/david/Kikobeats/osom.svg?style=flat-square" alt="Dependency status"></a>
 <a href="https://david-dm.org/Kikobeats/osom#info=devDependencies"><img src="https://img.shields.io/david/dev/Kikobeats/osom.svg?style=flat-square" alt="Dev Dependencies Status"></a>
 <a href="https://www.npmjs.org/package/osom"><img src="https://img.shields.io/npm/dm/osom.svg?style=flat-square" alt="NPM Status"></a>
 <a href="https://paypal.me/Kikobeats"><img src="https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square" alt="Donate"></a></p>
 <h2 id="installation">Installation</h2>
 <pre><code class="lang-bash">$ npm install osom --save
-</code></pre>
-<p>If you want to use in the browser (powered by <a href="https://browserify.org/">Browserify</a>):</p>
-<pre><code class="lang-bash">$ bower install osom --save
-</code></pre>
-<p>and later link in your HTML:</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="pl-s">&quot;bower_components/osom/dist/osom.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
 <h2 id="preview">Preview</h2>
 <pre><code class="lang-js"><span class="pl-k">var</span> osom = <span class="pl-c1">require</span>(<span class="pl-s">&apos;osom&apos;</span>)
@@ -145,7 +140,7 @@ Default: <code>false</code></p>
 validator({}) <span class="pl-c">// =&gt; TypeError(&quot;sorry but you must provide an age&quot;)</span>
 </code></pre>
 <h3 id="default">default</h3>
-<p>Type: <code>whatever</code>|<code>function</code><br>
+<p>Type: <code>string</code>|<code>object</code>|<code>number</code>|<code>boolean</code>|<code>function</code><br>
 Default: <code>null</code></p>
 <p>It sets a default value if <code>nill</code> value as input is provided.</p>
 <p>Additionally you can provide a <code>function</code> for set a dynamic value:</p>
