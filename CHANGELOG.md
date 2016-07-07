@@ -1,3 +1,25 @@
+<a name="1.1.1"></a>
+## 1.1.1 (2016-07-07)
+
+* Add coverage ([e34d711](https://github.com/kikobeats/osom/commit/e34d711))
+* Add docs ([3537a58](https://github.com/kikobeats/osom/commit/3537a58))
+* Adjus docs style ([5d1014b](https://github.com/kikobeats/osom/commit/5d1014b))
+* Block deps ([b37967b](https://github.com/kikobeats/osom/commit/b37967b))
+* Build docs with node 4 ([3b917c5](https://github.com/kikobeats/osom/commit/3b917c5))
+* Complete test coverage ([4931da2](https://github.com/kikobeats/osom/commit/4931da2))
+* Fix typo ([66af8d8](https://github.com/kikobeats/osom/commit/66af8d8))
+* Remove browser build ([53586ad](https://github.com/kikobeats/osom/commit/53586ad))
+* Remove commented source code ([923c7df](https://github.com/kikobeats/osom/commit/923c7df))
+* Update docpress.json ([1b9d882](https://github.com/kikobeats/osom/commit/1b9d882))
+* Update how to generate docs ([c8cf35d](https://github.com/kikobeats/osom/commit/c8cf35d))
+* Update README.md ([6a806db](https://github.com/kikobeats/osom/commit/6a806db))
+* Update README.md ([518212f](https://github.com/kikobeats/osom/commit/518212f))
+* Update style ([325c132](https://github.com/kikobeats/osom/commit/325c132))
+* chore(package): update lodash.merge to version 4.4.0 ([369019d](https://github.com/kikobeats/osom/commit/369019d))
+* chore(package): update lodash.reduce to version 4.4.0 ([e871b5b](https://github.com/kikobeats/osom/commit/e871b5b))
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2016-04-09)
 
