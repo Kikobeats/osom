@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "coveralls": "latest",
-    "docpress": "latest",
     "git-dirty": "latest",
     "git-update-ghpages": "latest",
     "mocha": "latest",
