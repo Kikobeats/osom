@@ -6,9 +6,32 @@ require('should')
 var osom = require('..')
 
 describe('schema defintion', function () {
-  it('simple rule', function () {
-    [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
-      osom(rule)({age: '23'}).should.be.eql({age: 23})
+  describe('simple rule', function () {
+    it('empty value', function () {
+      [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
+        osom(rule)().should.be.eql({})
+      })
+    })
+
+    it('providing value', function () {
+      [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
+        osom(rule)({age: '23'}).should.be.eql({age: 23})
+      })
+    })
+  })
+
+  it('empty values', function () {
+    [Number, String, Function, Boolean].forEach(function (type) {
+      var schema = {
+        age: {
+          type: type
+        }
+      }
+
+      var validator = osom(schema)
+      ;[null, {}].forEach(function (data) {
+        validator(data).should.be.eql({})
+      })
     })
   })
 
@@ -80,19 +103,37 @@ describe('schema defintion', function () {
     })
   })
 
-  it('disabling casting', function () {
-    var schema = {
-      age: {
-        type: String,
-        casting: false
+  describe('support casting (by default)', function () {
+    it('disable explicit', function () {
+      var schema = {
+        age: {
+          type: String,
+          casting: false
+        }
       }
-    }
 
-    var errMessage = "Expected a {string} for 'age'."
-    var validator = osom(schema)
+      var errMessage = "Expected a {string} for 'age'."
+      var validator = osom(schema)
 
-    ;[null, {age: 23}].forEach(function (obj) {
-      ;(function () { validator(obj) }).should.throw(errMessage)
+      ;[{age: 23}].forEach(function (obj) {
+        ;(function () { validator(obj) }).should.throw(errMessage)
+      })
+    })
+
+    it('disable explicit works with nill values', function () {
+      [Number, String, Function, Boolean].forEach(function (type) {
+        var schema = {
+          age: {
+            type: type,
+            casting: false
+          }
+        }
+
+        var validator = osom(schema)
+        ;[null, {}, {age: null}].forEach(function (data) {
+          validator(data).should.be.eql({})
+        })
+      })
     })
   })
 

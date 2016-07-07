@@ -6,8 +6,8 @@ var isArray = require('lodash.isarray')
 var assign = require('lodash.assign')
 var reduce = require('lodash.reduce')
 var merge = require('lodash.merge')
+var type = require('type-detect')
 var chaste = require('chaste')
-var type = require('fn-type')
 
 function exists (value) {
   return value != null
@@ -48,16 +48,12 @@ function throwValidationError (name, value, desription) {
 function Osom (schemaBlueprint, globalRules) {
   if (!(this instanceof Osom)) return new Osom(schemaBlueprint, globalRules)
   globalRules = globalRules || {}
-
   var schemaTypes = {}
-
   var schema = reduce(schemaBlueprint, function (schema, blueprint, name) {
     schema = addRule(globalRules, schema, blueprint, name)
-
     var type = schema[name].type
     schemaTypes[name] = type.name.toLowerCase()
     schema[name].type = chaste(type)
-
     return schema
   }, {})
 
@@ -67,17 +63,18 @@ function Osom (schemaBlueprint, globalRules) {
     return reduce(schema, function applyRule (objSchema, rule, name) {
       var hasValue = exists(obj[name])
 
-      if ((rule.required && !hasValue) ||
-        (!rule.casting && type(value !== schemaTypes[name]))) {
+      if ((rule.required && !hasValue) || (hasValue && !rule.casting && type(value !== schemaTypes[name]))) {
         throwTypeError(name, schemaTypes[name], rule.required)
       }
 
       var value
       if (rule.casting && hasValue) value = rule.type(obj[name])
       else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
-      else value = obj[name]
+      // else {
+      //   value = obj[name]
+      // }
 
-      // lodash.flow is buggy, this is a bugfix
+      // lodash.flow is buggy, this is a workaround (and dep-free)
       value = reduce(rule.transform, function (acc, fn) {
         return fn(acc)
       }, value)
@@ -87,7 +84,7 @@ function Osom (schemaBlueprint, globalRules) {
         if (!validator(value)) throwValidationError(name, value, rule.validate.message)
       }
 
-      objSchema[name] = value
+      if (exists(value)) objSchema[name] = value
       return objSchema
     }, {})
   }
