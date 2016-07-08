@@ -22,7 +22,7 @@ var DEFAULT = {
 
 function createSchemaRule (rule, globalRules) {
   var schema = typeof rule === 'function' ? { type: rule } : rule
-  var fields = merge(globalRules, schema)
+  var fields = merge({}, globalRules, schema)
   return assign({}, DEFAULT.BLUEPRINT, fields)
 }
 
@@ -61,13 +61,13 @@ function Osom (schemaBlueprint, globalRules) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
-      var hasValue = exists(obj[name])
+      var value = obj[name]
+      var hasValue = exists(value)
 
-      if ((rule.required && !hasValue) || (hasValue && !rule.casting && type(value !== schemaTypes[name]))) {
+      if ((rule.required && !hasValue) || (hasValue && !rule.casting && type(value) !== schemaTypes[name])) {
         throwTypeError(name, schemaTypes[name], rule.required)
       }
 
-      var value
       if (rule.casting && hasValue) value = rule.type(obj[name])
       else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
 
