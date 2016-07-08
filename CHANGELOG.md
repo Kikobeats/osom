@@ -1,3 +1,10 @@
+<a name="1.1.3"></a>
+## 1.1.3 (2016-07-08)
+
+* Fix globalRules shallow copy ([ade0966](https://github.com/kikobeats/osom/commit/ade0966))
+
+
+
 <a name="1.1.2"></a>
 ## 1.1.2 (2016-07-07)
 
