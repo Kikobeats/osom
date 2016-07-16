@@ -1,3 +1,11 @@
+<a name="1.1.4"></a>
+## 1.1.4 (2016-07-16)
+
+* Fix typo ([1182cf7](https://github.com/kikobeats/osom/commit/1182cf7))
+* Little refactor ([e9602c2](https://github.com/kikobeats/osom/commit/e9602c2))
+
+
+
 <a name="1.1.3"></a>
 ## 1.1.3 (2016-07-08)
 
