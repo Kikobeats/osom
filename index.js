@@ -21,7 +21,7 @@ var DEFAULT = {
 }
 
 function createSchemaRule (rule, globalRules) {
-  var schema = typeof rule === 'function' ? { type: rule } : rule
+  var schema = isFunction(rule) ? { type: rule } : rule
   var fields = merge({}, globalRules, schema)
   return assign({}, DEFAULT.BLUEPRINT, fields)
 }
