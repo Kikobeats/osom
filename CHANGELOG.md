@@ -1,3 +1,11 @@
+<a name="1.1.5"></a>
+## 1.1.5 (2016-07-16)
+
+* Add keywords ([51e42b1](https://github.com/kikobeats/osom/commit/51e42b1))
+* type-detect → kind-of dep ([91ca365](https://github.com/kikobeats/osom/commit/91ca365))
+
+
+
 <a name="1.1.4"></a>
 ## 1.1.4 (2016-07-16)
 

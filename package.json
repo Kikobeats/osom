@@ -2,7 +2,7 @@
   "name": "osom",
   "description": "An Awesome [/osom/] Object Schema Modeling",
   "homepage": "https://github.com/Kikobeats/osom",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "main": "index.js",
   "author": {
     "name": "Kiko Beats",
