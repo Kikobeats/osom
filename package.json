@@ -18,7 +18,9 @@
   },
   "keywords": [
     "modeling",
-    "schema"
+    "object",
+    "schema",
+    "schemaless"
   ],
   "dependencies": {
     "chaste": "~1.1.0",
