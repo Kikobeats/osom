@@ -6,7 +6,7 @@ var isArray = require('lodash.isarray')
 var assign = require('lodash.assign')
 var reduce = require('lodash.reduce')
 var merge = require('lodash.merge')
-var type = require('type-detect')
+var type = require('kind-of')
 var chaste = require('chaste')
 
 function exists (value) {
