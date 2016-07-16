@@ -38,9 +38,9 @@ function throwTypeError (name, type, required) {
   throw new TypeError(msg)
 }
 
-function throwValidationError (name, value, desription) {
+function throwValidationError (name, value, description) {
   var msg
-  if (desription) msg = desription.replace('{VALUE}', value)
+  if (description) msg = description.replace('{VALUE}', value)
   else msg = "Fail '" + value + "' validation for '" + name + "'."
   throw new TypeError(msg)
 }
