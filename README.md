@@ -46,10 +46,6 @@ var schema = osom({
   updatedAt: String
 })
 
-function trim (str) {
-  return str.trim()
-}
-
 // create validator based on schemas
 var validator = osom(schema)
 
