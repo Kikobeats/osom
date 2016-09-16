@@ -1,3 +1,16 @@
+<a name="1.1.6"></a>
+## 1.1.6 (2016-09-16)
+
+* Remove duplicate trim func ([9281f14](https://github.com/kikobeats/osom/commit/9281f14))
+* Update chaste dep ([0bf9167](https://github.com/kikobeats/osom/commit/0bf9167))
+* chore(package): update lodash.assign to version 4.1.0 ([00a126a](https://github.com/kikobeats/osom/commit/00a126a))
+* chore(package): update lodash.assign to version 4.2.0 ([33aa2c6](https://github.com/kikobeats/osom/commit/33aa2c6))
+* chore(package): update lodash.merge to version 4.5.0 ([323616b](https://github.com/kikobeats/osom/commit/323616b))
+* chore(package): update lodash.merge to version 4.6.0 ([925b111](https://github.com/kikobeats/osom/commit/925b111))
+* chore(package): update lodash.reduce to version 4.6.0 ([05581b4](https://github.com/kikobeats/osom/commit/05581b4))
+
+
+
 <a name="1.1.5"></a>
 ## 1.1.5 (2016-07-16)
 
