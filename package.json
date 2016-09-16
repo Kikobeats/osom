@@ -23,7 +23,7 @@
     "schemaless"
   ],
   "dependencies": {
-    "chaste": "~1.1.0",
+    "chaste": "~1.2.0",
     "kind-of": "~3.0.3",
     "lodash.assign": "~4.2.0",
     "lodash.isarray": "~4.0.0",
