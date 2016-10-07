@@ -93,7 +93,7 @@ describe('schema defintion', function () {
       var schema = {
         age: {
           type: String,
-          required: [true, 'your message here']
+          required: 'your message here'
         }
       }
 
@@ -103,7 +103,7 @@ describe('schema defintion', function () {
     })
   })
 
-  describe('support casting (by default)', function () {
+  xdescribe('support casting (by default)', function () {
     it('disable explicit', function () {
       var schema = {
         age: {
@@ -137,7 +137,7 @@ describe('schema defintion', function () {
     })
   })
 
-  describe('support validation', function () {
+  xdescribe('support validation', function () {
     it('based in a function', function () {
       var schema = {
         age: {

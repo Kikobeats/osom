@@ -1,8 +1,7 @@
 'use strict'
 
 var isFunction = require('lodash.isfunction')
-var isString = require('lodash.isstring')
-var isArray = require('lodash.isarray')
+var isBoolean = require('lodash.isboolean')
 var assign = require('lodash.assign')
 var reduce = require('lodash.reduce')
 var merge = require('lodash.merge')
@@ -31,11 +30,9 @@ function addRule (globalRules, schema, blueprint, name) {
   return schema
 }
 
-function throwTypeError (name, type, required) {
-  var msg
-  if (isArray(required) && isString(required[1])) msg = required[1]
-  else msg = 'Expected a {' + type + "} for '" + name + "'."
-  throw new TypeError(msg)
+function throwTypeError (name, type, message) {
+  if (isBoolean(message)) message = 'Expected a {' + type + "} for '" + name + "'."
+  throw new TypeError(message)
 }
 
 function throwValidationError (name, value, description) {

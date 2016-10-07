@@ -140,18 +140,18 @@ validator({age: '23'}) // => TypeError("Expected a {string} for 'age'.")
 
 ### required
 
-Type: `boolean`|`array`<br>
+Type: `boolean`|`string`<br>
 Default: `false`
 
 It marks a rule as required field and throws `TypeError` if value for the field is not present.
 
-Additionally is possible provide a custom error message. For do it, pass an `Array` as value where the second element represent the error message.
+Additionally is possible provide a custom error message. For do it, pass an `String`.
 
 ```js
 var schema = {
   age: {
     type: String,
-    required: [true, 'sorry but you must provide an age.']
+    required: 'sorry but you must provide an age.'
   }
 }
 
