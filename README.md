@@ -317,7 +317,6 @@ var schema = osom({
   updatedAt: String
 })
 
-
 module.exports = async.asyncify(schema)
 module.exports.sync = schema
 ```
