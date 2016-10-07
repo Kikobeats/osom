@@ -103,7 +103,7 @@ describe('schema defintion', function () {
     })
   })
 
-  xdescribe('support casting (by default)', function () {
+  describe('support casting (by default)', function () {
     it('disable explicit', function () {
       var schema = {
         age: {
@@ -137,7 +137,7 @@ describe('schema defintion', function () {
     })
   })
 
-  xdescribe('support validation', function () {
+  describe('support validation', function () {
     it('based in a function', function () {
       var schema = {
         age: {

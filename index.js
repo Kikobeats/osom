@@ -31,7 +31,7 @@ function addRule (globalRules, schema, blueprint, name) {
 }
 
 function throwTypeError (name, type, message) {
-  if (isBoolean(message)) message = 'Expected a {' + type + "} for '" + name + "'."
+  if (!message || isBoolean(message)) message = 'Expected a {' + type + "} for '" + name + "'."
   throw new TypeError(message)
 }
 
