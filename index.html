@@ -2,19 +2,67 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=a44c9e9d">
+    <link rel="stylesheet" href="assets/style.css?t=d358ee59">
     <link rel="stylesheet" href="main.css?t=ea99e8f2">
     <link rel="stylesheet" href="style.css?t=d707d9da">
-    <script src="assets/script.js?t=820b7ffa"></script>
+    <script src="assets/script.js?t=42463e55"></script>
     <title>osom</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
     <div class="doc-layout">
       <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">osom</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title link-installation" href="#installation">Installation</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title link-preview" href="#preview">Preview</a>
+            </li>
+            <li class="menu-item -level-1"><a class="link title link-usage" href="#usage">Usage</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title link-schema" href="#schema">Schema</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title link-simple" href="#simple">Simple</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-advanced" href="#advanced">Advanced</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title link-defining-rules" href="#defining-rules">Defining Rules</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title link-type" href="#type">type</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-casting" href="#casting">casting</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-required" href="#required">required</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-default" href="#default">default</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-transform" href="#transform">transform</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title link-validate" href="#validate">validate</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1"><a class="link title link-defining-global-rules" href="#defining-global-rules">Defining Global Rules</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title link-tips" href="#tips">Tips</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title link-working-with-async-code" href="#working-with-async-code">Working with async code</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1"><a class="link title link-license" href="#license">License</a>
+            </li>
+          </ul>
+        </li>
+      </div>
       <div class="body page-index">
         <div class="header-nav">
-          <div class="right"><a href="https://github.com/kikobeats/osom" data-title="kikobeats/osom" class="iconlink">
+          <div class="right"><a class="iconlink" href="https://github.com/kikobeats/osom" data-title="kikobeats/osom">
               <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
           </div>
         </div>
@@ -45,24 +93,24 @@
 
 <span class="pl-c">// setup your schema</span>
 <span class="pl-k">var</span> schema = osom({
-  title: {
-    type: <span class="pl-c1">String</span>,
-    validate: isValidTitle,
-    transform: [trim]
+  <span class="hljs-attr">title</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">validate</span>: isValidTitle,
+    <span class="hljs-attr">transform</span>: [trim]
   },
-  category: <span class="pl-c1">String</span>,
-  type: <span class="pl-c1">String</span>,
-  source: <span class="pl-c1">String</span>,
-  link: <span class="pl-c1">String</span>,
-  createdAt: <span class="pl-c1">String</span>,
-  updatedAt: <span class="pl-c1">String</span>
+  <span class="hljs-attr">category</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">source</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">link</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">createdAt</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">updatedAt</span>: <span class="pl-c1">String</span>
 })
 
 <span class="pl-c">// create validator based on schemas</span>
 <span class="pl-k">var</span> validator = osom(schema)
 
 <span class="pl-c">// validate it!</span>
-validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
 </code></pre>
 <h2 id="usage">Usage</h2>
 <p class="font-large">osom(schema, [global])</p>
@@ -77,7 +125,7 @@ validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c
 <p>The most common use case is validate the <code>type</code> of something.</p>
 <p>If you are only interested in the <code>type</code>, you can provide a simple schema like:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> simpleSchema = {
-  age: <span class="pl-c1">Number</span>
+  <span class="hljs-attr">age</span>: <span class="pl-c1">Number</span>
 }
 </code></pre>
 <p>Where <code>key</code> is the name of the rule and <code>value</code> the <code>type</code> of it.</p>
@@ -90,20 +138,20 @@ validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c
 <p>Type: <code>function</code></p>
 <p>As in <em>basic</em> mode, it specifies the `type of the output value:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">Number</span>
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">Number</span>
   }
 }
 </code></pre>
 <p>Internally it uses <a href="https://github.com/Kikobeats/chaste">chaste</a>. This makes easy casting compatible types:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">Number</span>
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">Number</span>
   }
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({age: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; {age: 23}</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; {age: 23}</span>
 </code></pre>
 <h3 id="casting">casting</h3>
 <p>Type: <code>boolean</code><br>
@@ -111,24 +159,24 @@ Default: <code>true</code></p>
 <p>It enable/disable type casting.
 An <code>TypeError</code> will be throwed under different <code>type</code> evaluation.</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    casting: <span class="pl-c1">false</span>
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">casting</span>: <span class="pl-c1">false</span>
   }
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({age: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Expected a {string} for &apos;age&apos;.&quot;)</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Expected a {string} for &apos;age&apos;.&quot;)</span>
 </code></pre>
 <h3 id="required">required</h3>
-<p>Type: <code>boolean</code>|<code>array</code><br>
+<p>Type: <code>boolean</code>|<code>string</code><br>
 Default: <code>false</code></p>
 <p>It marks a rule as required field and throws <code>TypeError</code> if value for the field is not present.</p>
-<p>Additionally is possible provide a custom error message. For do it, pass an <code>Array</code> as value where the second element represent the error message.</p>
+<p>Additionally is possible provide a custom error message. For do it, pass an <code>String</code>.</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    required: [<span class="pl-c1">true</span>, <span class="pl-s">&apos;sorry but you must provide an age.&apos;</span>]
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">required</span>: <span class="pl-s">&apos;sorry but you must provide an age.&apos;</span>
   }
 }
 
@@ -141,8 +189,8 @@ Default: <code>null</code></p>
 <p>It sets a default value if <code>nill</code> value as input is provided.</p>
 <p>Additionally you can provide a <code>function</code> for set a dynamic value:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">Number</span>, <span class="pl-k">default</span>: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ <span class="pl-k">return</span> <span class="hljs-number">23</span> }
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">Number</span>, <span class="hljs-attr">default</span>: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ <span class="pl-k">return</span> <span class="hljs-number">23</span> }
   }
 }
 
@@ -159,14 +207,14 @@ Default: <code>[]</code></p>
 }
 
 <span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    transform: [trim]
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">transform</span>: [trim]
   }
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({age: <span class="pl-s">&apos;    23   &apos;</span>}) <span class="pl-c">// =&gt; { age: &apos;23&apos; }</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;    23   &apos;</span>}) <span class="pl-c">// =&gt; { age: &apos;23&apos; }</span>
 </code></pre>
 <h3 id="validate">validate</h3>
 <p>Type: <code>function</code>|<code>object</code><br>
@@ -174,32 +222,32 @@ Default: <code>null</code></p>
 <p>It set up a <code>function</code> that will be exec to validate the input value.
 If it fails, it throws <code>TypeError</code>.</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    validate: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">validate</span>: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
       <span class="pl-k">return</span> v === <span class="pl-s">&apos;23&apos;</span>
     }
   }
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({age: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Fail &apos;25&apos; validation for &apos;age&apos;.&quot;)</span>
+validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Fail &apos;25&apos; validation for &apos;age&apos;.&quot;)</span>
 </code></pre>
 <p>Providing a object brings you the possibility set up a custom error message:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    validate: {
-      validator: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">validate</span>: {
+      <span class="hljs-attr">validator</span>: <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">v</span>) </span>{
         <span class="pl-k">return</span> v === <span class="pl-s">&apos;23&apos;</span>
       },
-      message: <span class="pl-s">&apos;expected a millenial value instead of {VALUE}!&apos;</span>
+      <span class="hljs-attr">message</span>: <span class="pl-s">&apos;expected a millenial value instead of {VALUE}!&apos;</span>
     }
   }
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({age: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;expected a millenial value instead of 25!&quot;)</span>
+validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;expected a millenial value instead of 25!&quot;)</span>
 </code></pre>
 <h2 id="defining-global-rules">Defining Global Rules</h2>
 <p>While is possible provide specific setup per each rule, also is possible provide them as global to apply to all rules.</p>
@@ -209,17 +257,17 @@ validator({age: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt
 }
 
 <span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>
   }
 }
 
 <span class="pl-k">var</span> globalFields = {
-  transform: [trim]
+  <span class="hljs-attr">transform</span>: [trim]
 }
 
 <span class="pl-k">var</span> validator = osom(schema, globalFields)
-validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
 </code></pre>
 <p>No problem if later you need to avoid it for a specific case.</p>
 <pre><code class="lang-js"><span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
@@ -227,18 +275,18 @@ validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c
 }
 
 <span class="pl-k">var</span> schema = {
-  age: {
-    type: <span class="pl-c1">String</span>,
-    transform: []
+  <span class="hljs-attr">age</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">transform</span>: []
   }
 }
 
 <span class="pl-k">var</span> globalFields = {
-  transform: [trim]
+  <span class="hljs-attr">transform</span>: [trim]
 }
 
 <span class="pl-k">var</span> validator = osom(schema, globalFields)
-validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;  23  &apos;}</span>
+validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;  23  &apos;}</span>
 </code></pre>
 <h2 id="tips">Tips</h2>
 <h3 id="working-with-async-code">Working with async code</h3>
@@ -246,17 +294,17 @@ validator({age: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c
 <p>However, you can use it comfortably in a async workflow transforming the interface into a callback/promise style.</p>
 <p>For example, consider use <a href="https://github.com/caolan/async#asyncify">async#asyncify</a> for do it. we could have a <code>schema.js</code> file like:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = osom({
-  title: {
-    type: <span class="pl-c1">String</span>,
-    validate: isValidTitle,
-    transform: [trim]
+  <span class="hljs-attr">title</span>: {
+    <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+    <span class="hljs-attr">validate</span>: isValidTitle,
+    <span class="hljs-attr">transform</span>: [trim]
   },
-  category: <span class="pl-c1">String</span>,
-  type: <span class="pl-c1">String</span>,
-  source: <span class="pl-c1">String</span>,
-  link: <span class="pl-c1">String</span>,
-  createdAt: <span class="pl-c1">String</span>,
-  updatedAt: <span class="pl-c1">String</span>
+  <span class="hljs-attr">category</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">source</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">link</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">createdAt</span>: <span class="pl-c1">String</span>,
+  <span class="hljs-attr">updatedAt</span>: <span class="pl-c1">String</span>
 })
 
 
@@ -275,54 +323,6 @@ schema(data, <span class="hljs-function"><span class="pl-k">function</span> (<sp
 <p>MIT &#xA9; <a href="https://kikobeats.com">Kiko Beats</a></p>
 
         </div>
-      </div>
-      <div class="menu toc-menu">
-        <li class="menu-item -level-0 -parent">
-          <ul class="submenu">
-            <li class="menu-item -level-1"><a href="index.html" class="link title -active link-index">osom</a>
-            </li>
-            <li class="menu-item -level-1"><a href="#installation" class="link title link-installation">Installation</a>
-            </li>
-            <li class="menu-item -level-1"><a href="#preview" class="link title link-preview">Preview</a>
-            </li>
-            <li class="menu-item -level-1"><a href="#usage" class="link title link-usage">Usage</a>
-            </li>
-            <li class="menu-item -level-1 -parent"><a href="#schema" class="link title link-schema">Schema</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a href="#simple" class="link title link-simple">Simple</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#advanced" class="link title link-advanced">Advanced</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><a href="#defining-rules" class="link title link-defining-rules">Defining Rules</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a href="#type" class="link title link-type">type</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#casting" class="link title link-casting">casting</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#required" class="link title link-required">required</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#default" class="link title link-default">default</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#transform" class="link title link-transform">transform</a>
-                </li>
-                <li class="menu-item -level-2"><a href="#validate" class="link title link-validate">validate</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1"><a href="#defining-global-rules" class="link title link-defining-global-rules">Defining Global Rules</a>
-            </li>
-            <li class="menu-item -level-1 -parent"><a href="#tips" class="link title link-tips">Tips</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a href="#working-with-async-code" class="link title link-working-with-async-code">Working with async code</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1"><a href="#license" class="link title link-license">License</a>
-            </li>
-          </ul>
-        </li>
       </div>
     </div>
   </body>

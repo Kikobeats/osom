@@ -107,6 +107,7 @@
     "index.html": {
       "source": "README.md",
       "title": "osom",
+      "pageTitle": "osom",
       "slug": "index",
       "headings": [
         {
