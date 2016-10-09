@@ -39,7 +39,7 @@
     "nyc": "latest",
     "should": "latest",
     "standard": "latest",
-    "standard-markdown": "~2.1.1",
+    "standard-markdown": "~2.2.0",
     "travis-after-all": "latest"
   },
   "engines": {
