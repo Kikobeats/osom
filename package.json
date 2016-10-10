@@ -43,7 +43,7 @@
     "travis-after-all": "latest"
   },
   "engines": {
-    "node": ">= 0.10"
+    "node": ">= 4"
   },
   "scripts": {
     "clean": "rm -rf node_modules",
