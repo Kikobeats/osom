@@ -103,7 +103,13 @@ describe('schema defintion', function () {
     })
   })
 
-  describe('support casting (by default)', function () {
+  describe('support casting', function () {
+    it('enable (by default)', function () {
+      var schema = { age: Array }
+      var validator = osom(schema)
+      validator({age: '23'}).should.be.eql({age: ['23']})
+    })
+
     it('disable explicit', function () {
       var schema = {
         age: {
