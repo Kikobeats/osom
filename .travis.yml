@@ -1,29 +1,35 @@
 language: node_js
 node_js:
-  - "stable"
-  - "5"
-  - "4"
-
+  - stable
+  - '5'
+  - '4'
+  - '6'
+  - '7'
 env:
   global:
     - GIT_NAME: Travis CI
     - GIT_EMAIL: nobody@nobody.org
     - GITHUB_REPO: Kikobeats/osom
     - GIT_SOURCE: _docpress
-
 after_success: npm run coveralls
 after_script:
-  - |
-      declare exitCode;
+  - >
+    declare exitCode;
 
-      # -- [1] -------------------------------------------------------
 
-      $(npm bin)/travis-after-all
-      exitCode=$?
+    # -- [1] -------------------------------------------------------
 
-      # -- [2] -------------------------------------------------------
 
-      if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" -a $exitCode -eq 0 ]; then
-        npm install docpress git-update-ghpages
-        ./node_modules/.bin/docpress build && ./node_modules/.bin/git-update-ghpages -e
-      fi
+    $(npm bin)/travis-after-all
+
+    exitCode=$?
+
+
+    # -- [2] -------------------------------------------------------
+
+
+    if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" -a
+    $exitCode -eq 0 ]; then
+      npm install docpress git-update-ghpages
+      ./node_modules/.bin/docpress build && ./node_modules/.bin/git-update-ghpages -e
+    fi
