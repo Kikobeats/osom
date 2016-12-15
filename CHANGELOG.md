@@ -1,3 +1,14 @@
+<a name="2.0.1"></a>
+## 2.0.1 (2016-12-15)
+
+* Add casting case ([1ab1a43](https://github.com/kikobeats/osom/commit/1ab1a43))
+* Add markdown lint ([7cac7cf](https://github.com/kikobeats/osom/commit/7cac7cf))
+* Drop old node version support ([bbc666a](https://github.com/kikobeats/osom/commit/bbc666a))
+* Update deps ([05b7d1a](https://github.com/kikobeats/osom/commit/05b7d1a))
+* chore(package): update standard-markdown to version 2.2.0 ([06517e1](https://github.com/kikobeats/osom/commit/06517e1))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2016-10-07)
 
