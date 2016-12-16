@@ -31,14 +31,21 @@ function addRule (globalRules, schema, blueprint, name) {
 }
 
 function throwTypeError (name, type, message) {
-  if (!message || isBoolean(message)) message = 'Expected a {' + type + "} for '" + name + "'."
+  if (!message || isBoolean(message)) {
+    message = `Expected {${type}} for '${name}'.`
+  }
   throw new TypeError(message)
 }
 
 function throwValidationError (name, value, description) {
   var msg
-  if (description) msg = description.replace('{VALUE}', value)
-  else msg = "Fail '" + value + "' validation for '" + name + "'."
+
+  if (description) {
+    msg = description.replace('{VALUE}', value)
+  } else {
+    msg = `Fail '${value}' validation for '${name}'.`
+  }
+
   throw new TypeError(msg)
 }
 

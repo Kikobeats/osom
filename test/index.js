@@ -85,7 +85,7 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      var errMessage = "Expected a {string} for 'age'."
+      var errMessage = "Expected {string} for 'age'."
       ;(function () { validator() }).should.throw(errMessage)
     })
 
@@ -118,7 +118,7 @@ describe('schema defintion', function () {
         }
       }
 
-      var errMessage = "Expected a {string} for 'age'."
+      var errMessage = "Expected {string} for 'age'."
       var validator = osom(schema)
 
       ;[{age: 23}].forEach(function (obj) {
