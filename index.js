@@ -5,8 +5,8 @@ var isBoolean = require('lodash.isboolean')
 var assign = require('lodash.assign')
 var reduce = require('lodash.reduce')
 var merge = require('lodash.merge')
-var type = require('kind-of')
 var chaste = require('chaste')
+var type = require('kind-of')
 
 function exists (value) {
   return value != null
