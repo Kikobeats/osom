@@ -1,3 +1,12 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2016-12-17)
+
+* Associate field name with the error ([040e824](https://github.com/kikobeats/osom/commit/040e824))
+* Sort ([4173d39](https://github.com/kikobeats/osom/commit/4173d39))
+* Use string template for concat ([ca05844](https://github.com/kikobeats/osom/commit/ca05844))
+
+
+
 <a name="2.0.1"></a>
 ## 2.0.1 (2016-12-15)
 
