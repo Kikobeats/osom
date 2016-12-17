@@ -30,23 +30,29 @@ function addRule (globalRules, schema, blueprint, name) {
   return schema
 }
 
+function createTypeError (message, field) {
+  var error = new TypeError(message)
+  error.field = field
+  return error
+}
+
 function throwTypeError (name, type, message) {
   if (!message || isBoolean(message)) {
     message = `Expected {${type}} for '${name}'.`
   }
-  throw new TypeError(message)
+  throw createTypeError(message, name)
 }
 
 function throwValidationError (name, value, description) {
-  var msg
+  var message
 
   if (description) {
-    msg = description.replace('{VALUE}', value)
+    message = description.replace('{VALUE}', value)
   } else {
-    msg = `Fail '${value}' validation for '${name}'.`
+    message = `Fail '${value}' validation for '${name}'.`
   }
 
-  throw new TypeError(msg)
+  throw createTypeError(message, name)
 }
 
 function Osom (schemaBlueprint, globalRules) {
