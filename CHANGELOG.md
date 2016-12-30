@@ -1,3 +1,14 @@
+<a name="2.1.1"></a>
+## 2.1.1 (2016-12-30)
+
+* Add files section ([d7a6f0b](https://github.com/kikobeats/osom/commit/d7a6f0b))
+* Add tests ([a1039b7](https://github.com/kikobeats/osom/commit/a1039b7))
+* Fix example ([b96bf15](https://github.com/kikobeats/osom/commit/b96bf15))
+* Update builds ([0eaedb5](https://github.com/kikobeats/osom/commit/0eaedb5))
+* Update deps ([d15cba8](https://github.com/kikobeats/osom/commit/d15cba8))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2016-12-17)
 
