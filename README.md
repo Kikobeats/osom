@@ -32,7 +32,7 @@ function isValidTitle (str) {
 }
 
 // setup your schema
-var schema = osom({
+var schema = {
   title: {
     type: String,
     validate: isValidTitle,
@@ -44,7 +44,7 @@ var schema = osom({
   link: String,
   createdAt: String,
   updatedAt: String
-})
+}
 
 // create validator based on schemas
 var validator = osom(schema)
