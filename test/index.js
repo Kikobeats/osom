@@ -13,9 +13,23 @@ describe('schema defintion', function () {
       })
     })
 
-    it('providing value', function () {
-      [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
-        osom(rule)({age: '23'}).should.be.eql({age: 23})
+    describe('providing value', function () {
+      it('Number', function () {
+        [
+          {age: Number},
+          {age: { type: Number }}
+        ].forEach(function (rule) {
+          osom(rule)({age: '23'}).should.be.eql({age: 23})
+        })
+      })
+
+      it('Array', function () {
+        [
+          {age: Array},
+          {age: { type: Array }}
+        ].forEach(function (rule) {
+          osom(rule)({age: ['23']}).should.be.eql({age: ['23']})
+        })
       })
     })
   })
