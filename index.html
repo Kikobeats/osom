@@ -92,7 +92,7 @@
 }
 
 <span class="pl-c">// setup your schema</span>
-<span class="pl-k">var</span> schema = osom({
+<span class="pl-k">var</span> schema = {
   <span class="hljs-attr">title</span>: {
     <span class="hljs-attr">type</span>: <span class="pl-c1">String</span>,
     <span class="hljs-attr">validate</span>: isValidTitle,
@@ -104,7 +104,7 @@
   <span class="hljs-attr">link</span>: <span class="pl-c1">String</span>,
   <span class="hljs-attr">createdAt</span>: <span class="pl-c1">String</span>,
   <span class="hljs-attr">updatedAt</span>: <span class="pl-c1">String</span>
-})
+}
 
 <span class="pl-c">// create validator based on schemas</span>
 <span class="pl-k">var</span> validator = osom(schema)
