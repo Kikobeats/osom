@@ -23,7 +23,7 @@
     "schemaless"
   ],
   "dependencies": {
-    "chaste": "~1.3.0",
+    "chaste": "~1.3.2",
     "kind-of": "~3.1.0",
     "lodash.assign": "~4.2.0",
     "lodash.isboolean": "~3.0.3",
@@ -39,7 +39,7 @@
     "nyc": "latest",
     "should": "latest",
     "standard": "latest",
-    "standard-markdown": "~2.2.0",
+    "standard-markdown": "~2.3.0",
     "travis-after-all": "latest"
   },
   "engines": {
