@@ -1,3 +1,11 @@
+<a name="2.1.2"></a>
+## 2.1.2 (2016-12-31)
+
+* ES6 ([86610bc](https://github.com/kikobeats/osom/commit/86610bc))
+* Refactor ([260a6c6](https://github.com/kikobeats/osom/commit/260a6c6))
+
+
+
 <a name="2.1.1"></a>
 ## 2.1.1 (2016-12-30)
 
