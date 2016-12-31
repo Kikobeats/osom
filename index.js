@@ -37,21 +37,14 @@ function createTypeError (message, field) {
 }
 
 function throwTypeError (name, type, message) {
-  if (!message || isBoolean(message)) {
-    message = `Expected {${type}} for '${name}'.`
-  }
+  if (!message || isBoolean(message)) message = `Expected {${type}} for '${name}'.`
   throw createTypeError(message, name)
 }
 
 function throwValidationError (name, value, description) {
   var message
-
-  if (description) {
-    message = description.replace('{VALUE}', value)
-  } else {
-    message = `Fail '${value}' validation for '${name}'.`
-  }
-
+  if (description) message = description.replace('{VALUE}', value)
+  else message = `Fail '${value}' validation for '${name}'.`
   throw createTypeError(message, name)
 }
 
@@ -59,6 +52,7 @@ function Osom (schemaBlueprint, globalRules) {
   if (!(this instanceof Osom)) return new Osom(schemaBlueprint, globalRules)
   globalRules = globalRules || {}
   var schemaTypes = {}
+
   var schema = reduce(schemaBlueprint, function (schema, blueprint, name) {
     schema = addRule(globalRules, schema, blueprint, name)
     var type = schema[name].type
@@ -73,10 +67,13 @@ function Osom (schemaBlueprint, globalRules) {
     return reduce(schema, function applyRule (objSchema, rule, name) {
       var value = obj[name]
       var hasValue = exists(value)
+      var isMissing = rule.required && !hasValue
+      if (isMissing) throwTypeError(name, schemaTypes[name], rule.required)
 
-      if ((rule.required && !hasValue) || (hasValue && !rule.casting && type(value) !== schemaTypes[name])) {
-        throwTypeError(name, schemaTypes[name], rule.required)
-      }
+      var isCastingDisabled = hasValue && !rule.casting
+      var isSameType = type(value) === schemaTypes[name]
+      var isInvalidType = isCastingDisabled && !isSameType
+      if (isInvalidType) throwTypeError(name, schemaTypes[name], rule.required)
 
       if (rule.casting && hasValue) value = rule.type(obj[name])
       else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
