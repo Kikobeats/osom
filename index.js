@@ -72,9 +72,13 @@ function Osom (schemaBlueprint, globalRules) {
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
       var value = obj[name]
-      var hasValue = exists(value)
 
-      if ((rule.required && !hasValue) || (hasValue && !rule.casting && type(value) !== schemaTypes[name])) {
+      var hasValue = exists(value)
+      var isMissing = rule.required && !hasValue
+      var isAny = schemaTypes[name] === 'any'
+      var isMatch = type(value) === schemaTypes[name]
+
+      if (isMissing || (hasValue && !rule.casting && !isAny && !isMatch)) {
         throwTypeError(name, schemaTypes[name], rule.required)
       }
 
@@ -97,6 +101,16 @@ function Osom (schemaBlueprint, globalRules) {
   }
 
   return osom
+}
+
+Osom.types = {
+  any: function Any (value) { return value },
+  string: String,
+  number: Number,
+  boolean: Boolean,
+  date: Date,
+  array: Array,
+  object: Object
 }
 
 module.exports = Osom
