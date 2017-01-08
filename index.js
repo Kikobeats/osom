@@ -73,7 +73,7 @@ function Osom (schemaBlueprint, globalRules) {
       const isInvalidType = isCastingDisabled && !isSameType
       if (isInvalidType) throwTypeError(name, schemaTypes[name], rule.required)
 
-      if (rule.casting && hasValue) value = rule.type(obj[name])
+      if (hasValue) value = rule.casting ? rule.type(obj[name]) : obj[name]
       else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
 
       // lodash.flow is buggy, this is a workaround (and dep-free)

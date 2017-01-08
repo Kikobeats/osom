@@ -50,7 +50,7 @@ var schema = {
 var validator = osom(schema)
 
 // validate it!
-validator({age: '  23  '}) // => {age: '23'}
+validator({title: '  23  '}) // => {title: '23'}
 ```
 
 ## Usage

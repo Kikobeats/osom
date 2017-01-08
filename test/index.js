@@ -71,6 +71,18 @@ describe('schema defintion', function () {
       var validator = osom(schema)
       validator().should.be.eql({age: 23})
     })
+
+    it('based in a fn with precedence given to provided values', function () {
+      var rand = () => String(Math.random())
+      var schema = {
+        age: {
+          type: String, default: rand
+        }
+      }
+
+      var validator = osom(schema, { casting: false })
+      validator({ age: '23' }).should.be.eql({ age: '23' })
+    })
   })
 
   it('support transforms', function () {
