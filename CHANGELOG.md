@@ -1,3 +1,15 @@
+<a name="2.1.3"></a>
+## 2.1.3 (2017-01-08)
+
+* bug fix: now default values don't override provided values ([923076d](https://github.com/kikobeats/osom/commit/923076d))
+* Fix typo ([dc6068d](https://github.com/kikobeats/osom/commit/dc6068d))
+* Improve keywords ([498adce](https://github.com/kikobeats/osom/commit/498adce))
+* Refactor specific test for casting disabled ([df9d07e](https://github.com/kikobeats/osom/commit/df9d07e))
+* Update dep ([bc00a8c](https://github.com/kikobeats/osom/commit/bc00a8c))
+* Update README.md ([e390a67](https://github.com/kikobeats/osom/commit/e390a67))
+
+
+
 <a name="2.1.2"></a>
 ## 2.1.2 (2016-12-31)
 
