@@ -25,5 +25,7 @@ after_script:
 
       if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" -a $exitCode -eq 0 ]; then
         npm install docpress git-update-ghpages
-        ./node_modules/.bin/docpress build && ./node_modules/.bin/git-update-ghpages -e
+        ./node_modules/.bin/docpress build
+        echo "osom.js.org" > _docpress/CNAME
+        ./node_modules/.bin/git-update-ghpages -e
       fi
