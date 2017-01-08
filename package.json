@@ -17,10 +17,26 @@
     "url": "https://github.com/Kikobeats/osom/issues"
   },
   "keywords": [
+    "agnostic",
+    "casting",
+    "data",
+    "database",
+    "datastore",
+    "db",
+    "doc",
+    "document",
+    "model",
     "modeling",
+    "nosql",
     "object",
+    "odm",
+    "orm",
+    "query",
     "schema",
-    "schemaless"
+    "schemaless",
+    "transformation",
+    "type",
+    "validation"
   ],
   "dependencies": {
     "chaste": "~1.3.2",
