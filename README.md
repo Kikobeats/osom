@@ -2,7 +2,7 @@
 
 <!-- {.massive-header.-with-tagline} -->
 
-> An Awesome [/osom/] Object Schema Modeling. Inspired in [mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
+> An Awesome [/osom/] Object Data Modeling. Inspired in [mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
 
 ![Last version](https://img.shields.io/github/tag/Kikobeats/osom.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/Kikobeats/osom/master.svg?style=flat-square)](https://travis-ci.org/Kikobeats/osom)
