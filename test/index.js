@@ -71,18 +71,6 @@ describe('schema defintion', function () {
       var validator = osom(schema)
       validator().should.be.eql({age: 23})
     })
-
-    it('based in a fn with precedence given to provided values', function () {
-      var rand = () => String(Math.random())
-      var schema = {
-        age: {
-          type: String, default: rand
-        }
-      }
-
-      var validator = osom(schema, { casting: false })
-      validator({ age: '23' }).should.be.eql({ age: '23' })
-    })
   })
 
   it('support transforms', function () {
@@ -129,43 +117,67 @@ describe('schema defintion', function () {
     })
   })
 
-  describe('support casting', function () {
+  describe('support casting by default', function () {
     it('enable (by default)', function () {
       var schema = { age: Array }
       var validator = osom(schema)
       validator({age: '23'}).should.be.eql({age: ['23']})
     })
+  })
 
-    it('disable explicit', function () {
+  describe('casting disabled explicitly', function () {
+    it('throw an error under different type provided', function () {
       var schema = {
         age: {
-          type: String,
-          casting: false
+          type: String
         }
       }
 
       var errMessage = "Expected {string} for 'age'."
-      var validator = osom(schema)
+      var validator = osom(schema, {casting: false})
 
       ;[{age: 23}].forEach(function (obj) {
         ;(function () { validator(obj) }).should.throw(errMessage)
       })
     })
 
-    it('disable explicit works with nill values', function () {
+    it('works with nill values of the same type', function () {
       [Number, String, Function, Boolean].forEach(function (type) {
         var schema = {
           age: {
-            type: type,
-            casting: false
+            type: type
           }
         }
 
-        var validator = osom(schema)
+        var validator = osom(schema, {casting: false})
         ;[null, {}, {age: null}].forEach(function (data) {
           validator(data).should.be.eql({})
         })
       })
+    })
+
+    it('works with default value (not necessary of the same type defined)', function () {
+      var schema = {
+        age: {
+          type: String,
+          default: 23
+        }
+      }
+
+      var validator = osom(schema, { casting: false })
+      validator({}).should.be.eql({ age: 23 })
+    })
+
+    it('works with a value provided of the same type', function () {
+      var schema = {
+        age: {
+          type: String,
+          default: '24'
+        }
+      }
+
+      var validator = osom(schema, { casting: false })
+      validator({ age: '23' }).should.be.eql({ age: '23' })
     })
   })
 
