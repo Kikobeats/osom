@@ -1,3 +1,12 @@
+<a name="2.1.4"></a>
+## 2.1.4 (2017-01-25)
+
+* Add custom domain ([769201b](https://github.com/kikobeats/osom/commit/769201b))
+* Just run validator when the value is present ([8975eb9](https://github.com/kikobeats/osom/commit/8975eb9))
+* Update ([f45a235](https://github.com/kikobeats/osom/commit/f45a235))
+
+
+
 <a name="2.1.3"></a>
 ## 2.1.3 (2017-01-08)
 
