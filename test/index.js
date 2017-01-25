@@ -214,6 +214,21 @@ describe('schema defintion', function () {
       ;(function () { validator({age: 25}) }).should.throw(errMessage)
     })
 
+    it('just run validator when the field is present', function () {
+      var schema = {
+        name: String,
+        age: {
+          type: String,
+          validate: function (v) {
+            return v === '23'
+          }
+        }
+      }
+
+      var validator = osom(schema)
+      validator({name: 'foo bar'}).should.be.eql({name: 'foo bar'})
+    })
+
     it('custom error message', function () {
       var schema = {
         age: {

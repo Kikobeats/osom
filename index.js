@@ -79,7 +79,7 @@ function Osom (schemaBlueprint, globalRules) {
       // lodash.flow is buggy, this is a workaround (and dep-free)
       value = reduce(rule.transform, (acc, fn) => fn(acc), value)
 
-      if (rule.validate) {
+      if (hasValue && rule.validate) {
         const validator = isFunction(rule.validate) ? rule.validate : rule.validate.validator
         if (!validator(value)) throwValidationError(name, value, rule.validate.message)
       }
