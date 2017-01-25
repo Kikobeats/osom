@@ -1,8 +1,5 @@
 'use strict'
 
-const isFunction = require('lodash.isfunction')
-const isBoolean = require('lodash.isboolean')
-const assign = require('lodash.assign')
 const reduce = require('lodash.reduce')
 const merge = require('lodash.merge')
 const chaste = require('chaste')
@@ -20,7 +17,7 @@ const DEFAULT = {
 function createSchemaRule (rule, globalRules) {
   const schema = isFunction(rule) ? { type: rule } : rule
   const fields = merge({}, globalRules, schema)
-  return assign({}, DEFAULT.BLUEPRINT, fields)
+  return Object.assign({}, DEFAULT.BLUEPRINT, fields)
 }
 
 function addRule (globalRules, schema, blueprint, name) {
@@ -44,6 +41,19 @@ function throwValidationError (name, value, description) {
   if (description) message = description.replace('{VALUE}', value)
   else message = `Fail '${value}' validation for '${name}'.`
   throw createTypeError(message, name)
+}
+
+function getValidator (rule) {
+  const validate = rule.validate
+  return isFunction(validate) ? validate : validate.validator
+}
+
+function isBoolean (value) {
+  return type(value) === 'boolean'
+}
+
+function isFunction (value) {
+  return type(value) === 'function'
 }
 
 function Osom (schemaBlueprint, globalRules) {
@@ -80,7 +90,7 @@ function Osom (schemaBlueprint, globalRules) {
       value = reduce(rule.transform, (acc, fn) => fn(acc), value)
 
       if (hasValue && rule.validate) {
-        const validator = isFunction(rule.validate) ? rule.validate : rule.validate.validator
+        const validator = getValidator(rule)
         if (!validator(value)) throwValidationError(name, value, rule.validate.message)
       }
 
