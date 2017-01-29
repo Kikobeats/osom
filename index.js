@@ -25,22 +25,23 @@ function addRule (globalRules, schema, blueprint, name) {
   return schema
 }
 
-function createTypeError (message, field) {
+function createTypeError (message, key, value) {
   const error = new TypeError(message)
-  error.field = field
+  error.key = key
+  error.value = value
   return error
 }
 
-function throwTypeError (name, type, message) {
-  if (!message || isBoolean(message)) message = `Expected {${type}} for '${name}'.`
-  throw createTypeError(message, name)
+function throwTypeError (key, value, type, message) {
+  if (!message || isBoolean(message)) message = `Expected {${type}} for '${key}'.`
+  throw createTypeError(message, key, value)
 }
 
-function throwValidationError (name, value, description) {
+function throwValidationError (key, value, description) {
   let message
   if (description) message = description.replace('{VALUE}', value)
-  else message = `Fail '${value}' validation for '${name}'.`
-  throw createTypeError(message, name)
+  else message = `Fail '${value}' validation for '${key}'.`
+  throw createTypeError(message, key, value)
 }
 
 function getValidator (rule) {
@@ -73,28 +74,35 @@ function Osom (schemaBlueprint, globalRules) {
     obj = obj || {}
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
-      let value = obj[name]
+      const value = obj[name]
       const hasValue = exists(value)
-      const isMissing = rule.required && !hasValue
-      if (isMissing) throwTypeError(name, schemaTypes[name], rule.required)
+      const isRequired = rule.required
+      const isMissing = isRequired && !hasValue
+      const expectedValue = schemaTypes[name]
 
-      const isCastingDisabled = hasValue && !rule.casting
-      const isSameType = type(value) === schemaTypes[name]
+      if (isMissing) throwTypeError(name, value, expectedValue, isRequired)
+
+      const isCasting = rule.casting
+      const isCastingDisabled = hasValue && !isCasting
+      const isSameType = type(value) === expectedValue
       const isInvalidType = isCastingDisabled && !isSameType
-      if (isInvalidType) throwTypeError(name, schemaTypes[name], rule.required)
+      if (isInvalidType) throwTypeError(name, value, expectedValue, isRequired)
 
-      if (hasValue) value = rule.casting ? rule.type(obj[name]) : obj[name]
-      else if (rule.default) value = !isFunction(rule.default) ? rule.default : rule.default()
+      let TypedValue
+      const defaultValue = rule.default
+      const validate = rule.validate
+      if (hasValue) TypedValue = isCasting ? rule.type(value) : value
+      else if (defaultValue) TypedValue = !isFunction(defaultValue) ? defaultValue : defaultValue()
 
       // lodash.flow is buggy, this is a workaround (and dep-free)
-      value = reduce(rule.transform, (acc, fn) => fn(acc), value)
+      TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
 
-      if (hasValue && rule.validate) {
+      if (hasValue && validate) {
         const validator = getValidator(rule)
-        if (!validator(value)) throwValidationError(name, value, rule.validate.message)
+        if (!validator(TypedValue)) throwValidationError(name, value, validate.message)
       }
 
-      if (exists(value)) objSchema[name] = value
+      if (exists(TypedValue)) objSchema[name] = TypedValue
       return objSchema
     }, {})
   }

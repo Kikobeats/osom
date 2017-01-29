@@ -2,8 +2,8 @@
 
 'use strict'
 
-require('should')
-var osom = require('..')
+const should = require('should')
+const osom = require('..')
 
 describe('schema defintion', function () {
   describe('simple rule', function () {
@@ -245,6 +245,51 @@ describe('schema defintion', function () {
       var validator = osom(schema)
       var errMessage = 'expected a millenial value instead of 25!'
       ;(function () { validator({age: 25}) }).should.throw(errMessage)
+    })
+  })
+})
+
+describe('error', function () {
+  describe('attach key and value into error object', function () {
+    it('when value is not present', function () {
+      var schema = {
+        age: {
+          type: String,
+          required: true
+        }
+      }
+
+      var validator = osom(schema)
+
+      try {
+        validator()
+      } catch (err) {
+        err.key.should.be.equal('age')
+        should(err.value).be.undefined()
+      }
+    })
+
+    it('when value is present', function () {
+      var schema = {
+        age: {
+          type: String,
+          validate: {
+            validator: function (v) {
+              return v === '23'
+            },
+            message: 'expected a millenial value instead of {VALUE}!'
+          }
+        }
+      }
+
+      var validator = osom(schema)
+
+      try {
+        validator({age: 25})
+      } catch (err) {
+        err.key.should.be.equal('age')
+        err.value.should.be.equal(25)
+      }
     })
   })
 })
