@@ -1,3 +1,11 @@
+<a name="2.2.0"></a>
+# 2.2.0 (2017-01-29)
+
+* Less dependencies ([f0b1523](https://github.com/kikobeats/osom/commit/f0b1523))
+* Little optimization ([1067263](https://github.com/kikobeats/osom/commit/1067263))
+
+
+
 <a name="2.1.4"></a>
 ## 2.1.4 (2017-01-25)
 
