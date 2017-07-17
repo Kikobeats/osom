@@ -1,5 +1,7 @@
 # osom
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Kikobeats/osom.svg)](https://greenkeeper.io/)
+
 <!-- {.massive-header.-with-tagline} -->
 
 > An Awesome [/osom/] Object Data Modeling. Inspired in [mongoose ](https://github.com/Automattic/mongoose#defining-a-model) but Database Agnostic.
