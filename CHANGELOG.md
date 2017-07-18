@@ -1,3 +1,12 @@
+<a name="2.2.1"></a>
+## 2.2.1 (2017-07-18)
+
+* Update README.md ([2e229c0](https://github.com/kikobeats/osom/commit/2e229c0))
+* docs(readme): add Greenkeeper badge ([72e4727](https://github.com/kikobeats/osom/commit/72e4727))
+* chore(package): update dependencies ([41b2da5](https://github.com/kikobeats/osom/commit/41b2da5))
+
+
+
 <a name="2.2.0"></a>
 # 2.2.0 (2017-01-29)
 
