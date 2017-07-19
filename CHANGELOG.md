@@ -1,3 +1,10 @@
+<a name="2.2.2"></a>
+## 2.2.2 (2017-07-19)
+
+* Update homepage ([49c3772](https://github.com/kikobeats/osom/commit/49c3772))
+
+
+
 <a name="2.2.1"></a>
 ## 2.2.1 (2017-07-18)
 
