@@ -1,6 +1,6 @@
 'use strict'
 
-const { merge, reduce } = require('lodash')
+const { isFunction, isBoolean, merge, reduce } = require('lodash')
 const chaste = require('chaste')
 const type = require('kind-of')
 
@@ -46,14 +46,6 @@ function throwValidationError (key, value, description) {
 function getValidator (rule) {
   const validate = rule.validate
   return isFunction(validate) ? validate : validate.validator
-}
-
-function isBoolean (value) {
-  return type(value) === 'boolean'
-}
-
-function isFunction (value) {
-  return type(value) === 'function'
 }
 
 function Osom (schemaBlueprint, globalRules) {
