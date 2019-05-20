@@ -50,7 +50,7 @@ var schema = {
 var validator = osom(schema)
 
 // validate it!
-validator({title: '  23  '}) // => {title: '23'}
+validator({ title: '  23  ' }) // => {title: '23'}
 ```
 
 ## Usage
@@ -115,7 +115,7 @@ var schema = {
 }
 
 var validator = osom(schema)
-validator({age: '23'}) // => {age: 23}
+validator({ age: '23' }) // => {age: 23}
 ```
 
 ### casting
@@ -135,7 +135,7 @@ var schema = {
 }
 
 var validator = osom(schema)
-validator({age: '23'}) // => TypeError("Expected a {string} for 'age'.")
+validator({ age: '23' }) // => TypeError("Expected a {string} for 'age'.")
 ```
 
 ### required
@@ -201,7 +201,7 @@ var schema = {
 }
 
 var validator = osom(schema)
-validator({age: '    23   '}) // => { age: '23' }
+validator({ age: '    23   ' }) // => { age: '23' }
 ```
 
 ### validate
@@ -223,7 +223,7 @@ var schema = {
 }
 
 var validator = osom(schema)
-validator({age: 25}) // => TypeError("Fail '25' validation for 'age'.")
+validator({ age: 25 }) // => TypeError("Fail '25' validation for 'age'.")
 ```
 
 Providing a object brings you the possibility set up a custom error message:
@@ -242,7 +242,7 @@ var schema = {
 }
 
 var validator = osom(schema)
-validator({age: 25}) // => TypeError("expected a millenial value instead of 25!")
+validator({ age: 25 }) // => TypeError("expected a millenial value instead of 25!")
 ```
 
 ## Defining Global Rules
@@ -267,7 +267,7 @@ var globalFields = {
 }
 
 var validator = osom(schema, globalFields)
-validator({age: '  23  '}) // => {age: '23'}
+validator({ age: '  23  ' }) // => {age: '23'}
 ```
 
 No problem if later you need to avoid it for a specific case.
@@ -289,7 +289,7 @@ var globalFields = {
 }
 
 var validator = osom(schema, globalFields)
-validator({age: '  23  '}) // => {age: '  23  '}
+validator({ age: '  23  ' }) // => {age: '  23  '}
 ```
 
 ## Tips

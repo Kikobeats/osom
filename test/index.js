@@ -8,7 +8,7 @@ const osom = require('..')
 describe('schema defintion', function () {
   describe('simple rule', function () {
     it('empty value', function () {
-      [{age: Number}, {age: { type: Number }}].forEach(function (rule) {
+      [{ age: Number }, { age: { type: Number } }].forEach(function (rule) {
         osom(rule)().should.be.eql({})
       })
     })
@@ -16,19 +16,19 @@ describe('schema defintion', function () {
     describe('providing value', function () {
       it('Number', function () {
         [
-          {age: Number},
-          {age: { type: Number }}
+          { age: Number },
+          { age: { type: Number } }
         ].forEach(function (rule) {
-          osom(rule)({age: '23'}).should.be.eql({age: 23})
+          osom(rule)({ age: '23' }).should.be.eql({ age: 23 })
         })
       })
 
       it('Array', function () {
         [
-          {age: Array},
-          {age: { type: Array }}
+          { age: Array },
+          { age: { type: Array } }
         ].forEach(function (rule) {
-          osom(rule)({age: ['23']}).should.be.eql({age: ['23']})
+          osom(rule)({ age: ['23'] }).should.be.eql({ age: ['23'] })
         })
       })
     })
@@ -58,7 +58,7 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      validator().should.be.eql({age: 23})
+      validator().should.be.eql({ age: 23 })
     })
 
     it('based in a fn', function () {
@@ -69,7 +69,7 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      validator().should.be.eql({age: 23})
+      validator().should.be.eql({ age: 23 })
     })
   })
 
@@ -86,7 +86,7 @@ describe('schema defintion', function () {
     }
 
     var validator = osom(schema)
-    validator({age: '  23  '}).should.be.eql({age: '23'})
+    validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 
   describe('support required values', function () {
@@ -121,7 +121,7 @@ describe('schema defintion', function () {
     it('enable (by default)', function () {
       var schema = { age: Array }
       var validator = osom(schema)
-      validator({age: '23'}).should.be.eql({age: ['23']})
+      validator({ age: '23' }).should.be.eql({ age: ['23'] })
     })
   })
 
@@ -134,9 +134,9 @@ describe('schema defintion', function () {
       }
 
       var errMessage = "Expected {string} for 'age'."
-      var validator = osom(schema, {casting: false})
+      var validator = osom(schema, { casting: false })
 
-      ;[{age: 23}].forEach(function (obj) {
+      ;[{ age: 23 }].forEach(function (obj) {
         ;(function () { validator(obj) }).should.throw(errMessage)
       })
     })
@@ -149,8 +149,8 @@ describe('schema defintion', function () {
           }
         }
 
-        var validator = osom(schema, {casting: false})
-        ;[null, {}, {age: null}].forEach(function (data) {
+        var validator = osom(schema, { casting: false })
+        ;[null, {}, { age: null }].forEach(function (data) {
           validator(data).should.be.eql({})
         })
       })
@@ -194,7 +194,7 @@ describe('schema defintion', function () {
 
       var validator = osom(schema)
       var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { validator({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
     })
 
     it('based in a object key', function () {
@@ -211,7 +211,7 @@ describe('schema defintion', function () {
 
       var validator = osom(schema)
       var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { validator({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
     })
 
     it('just run validator when the field is present', function () {
@@ -226,7 +226,7 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      validator({name: 'foo bar'}).should.be.eql({name: 'foo bar'})
+      validator({ name: 'foo bar' }).should.be.eql({ name: 'foo bar' })
     })
 
     it('custom error message', function () {
@@ -244,7 +244,7 @@ describe('schema defintion', function () {
 
       var validator = osom(schema)
       var errMessage = 'expected a millenial value instead of 25!'
-      ;(function () { validator({age: 25}) }).should.throw(errMessage)
+      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
     })
   })
 })
@@ -285,7 +285,7 @@ describe('error', function () {
       var validator = osom(schema)
 
       try {
-        validator({age: 25})
+        validator({ age: 25 })
       } catch (err) {
         err.key.should.be.equal('age')
         err.value.should.be.equal(25)
@@ -311,6 +311,6 @@ describe('behavior', function () {
     }
 
     var validator = osom(schema, globalFields)
-    validator({age: '  23  '}).should.be.eql({age: '23'})
+    validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 })
