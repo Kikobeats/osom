@@ -1,10 +1,8 @@
 'use strict'
 
-const { isFunction, isBoolean, merge, reduce } = require('lodash')
+const { isNil, isFunction, isBoolean, merge, reduce } = require('lodash')
 const chaste = require('chaste')
-const type = require('kind-of')
-
-const exists = (value) => value != null
+const is = require('kind-of')
 
 const DEFAULT = {
   BLUEPRINT: {
@@ -15,8 +13,8 @@ const DEFAULT = {
 
 function createSchemaRule (rule, globalRules) {
   const schema = isFunction(rule) ? { type: rule } : rule
-  const fields = merge({}, globalRules, schema)
-  return Object.assign({}, DEFAULT.BLUEPRINT, fields)
+  const fields = merge(globalRules, schema)
+  return Object.assign({ ...DEFAULT.BLUEPRINT, ...fields })
 }
 
 function addRule (globalRules, schema, blueprint, name) {
@@ -66,7 +64,7 @@ function Osom (schemaBlueprint, globalRules) {
 
     return reduce(schema, function applyRule (objSchema, rule, name) {
       const value = obj[name]
-      const hasValue = exists(value)
+      const hasValue = !isNil(value)
       const isRequired = rule.required
       const isMissing = isRequired && !hasValue
       const expectedValue = schemaTypes[name]
@@ -75,8 +73,7 @@ function Osom (schemaBlueprint, globalRules) {
 
       const isCasting = rule.casting
       const isCastingDisabled = hasValue && !isCasting
-      const isSameType = type(value) === expectedValue
-      const isInvalidType = isCastingDisabled && !isSameType
+      const isInvalidType = isCastingDisabled && is(value) !== expectedValue
       if (isInvalidType) throwTypeError(name, value, expectedValue, isRequired)
 
       let TypedValue
@@ -85,7 +82,6 @@ function Osom (schemaBlueprint, globalRules) {
       if (hasValue) TypedValue = isCasting ? rule.type(value) : value
       else if (defaultValue) TypedValue = !isFunction(defaultValue) ? defaultValue : defaultValue()
 
-      // lodash.flow is buggy, this is a workaround (and dep-free)
       TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
 
       if (hasValue && validate) {
@@ -93,7 +89,7 @@ function Osom (schemaBlueprint, globalRules) {
         if (!validator(TypedValue)) throwValidationError(name, value, validate.message)
       }
 
-      if (exists(TypedValue)) objSchema[name] = TypedValue
+      if (!isNil((TypedValue))) objSchema[name] = TypedValue
       return objSchema
     }, {})
   }
