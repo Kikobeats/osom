@@ -1,3 +1,13 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2019-05-20)
+
+* build: add more information into generic message ([40b0060](https://github.com/kikobeats/osom/commit/40b0060))
+* refactor: use a function ([f0c4d59](https://github.com/kikobeats/osom/commit/f0c4d59))
+* feat: infer required if validator is present ([a79256c](https://github.com/kikobeats/osom/commit/a79256c))
+* feat: use %s instead of {VALUE} ([85c448a](https://github.com/kikobeats/osom/commit/85c448a))
+
+
+
 <a name="2.3.1"></a>
 ## 2.3.1 (2019-05-20)
 
