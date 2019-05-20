@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="assets/style.css?t=90051322">
     <link rel="stylesheet" href="main.css?t=ea99e8f2">
     <link rel="stylesheet" href="style.css?t=d707d9da">
-    <script src="assets/script.js?t=42463e55"></script>
+    <script src="assets/script.js?t=93f1a66c"></script>
     <title>osom</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -13,52 +13,54 @@
     <div class="doc-layout">
       <div class="toggle menu-toggle js-menu-toggle"></div>
       <div class="menu toc-menu">
-        <li class="menu-item -level-0 -parent">
-          <ul class="submenu">
-            <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">osom</a>
-            </li>
-            <li class="menu-item -level-1"><a class="link title link-installation" href="#installation">Installation</a>
-            </li>
-            <li class="menu-item -level-1"><a class="link title link-preview" href="#preview">Preview</a>
-            </li>
-            <li class="menu-item -level-1"><a class="link title link-usage" href="#usage">Usage</a>
-            </li>
-            <li class="menu-item -level-1 -parent"><a class="link title link-schema" href="#schema">Schema</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title link-simple" href="#simple">Simple</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-advanced" href="#advanced">Advanced</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><a class="link title link-defining-rules" href="#defining-rules">Defining Rules</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title link-type" href="#type">type</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-casting" href="#casting">casting</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-required" href="#required">required</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-default" href="#default">default</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-transform" href="#transform">transform</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title link-validate" href="#validate">validate</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1"><a class="link title link-defining-global-rules" href="#defining-global-rules">Defining Global Rules</a>
-            </li>
-            <li class="menu-item -level-1 -parent"><a class="link title link-tips" href="#tips">Tips</a>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title link-working-with-async-code" href="#working-with-async-code">Working with async code</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1"><a class="link title link-license" href="#license">License</a>
-            </li>
-          </ul>
-        </li>
+        <ul>
+          <li class="menu-item -level-0 -parent">
+            <ul class="submenu">
+              <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">osom</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title link-installation" href="#installation">Installation</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title link-preview" href="#preview">Preview</a>
+              </li>
+              <li class="menu-item -level-1"><a class="link title link-usage" href="#usage">Usage</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title link-schema" href="#schema">Schema</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title link-simple" href="#simple">Simple</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-advanced" href="#advanced">Advanced</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title link-defining-rules" href="#defining-rules">Defining Rules</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title link-type" href="#type">type</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-casting" href="#casting">casting</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-required" href="#required">required</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-default" href="#default">default</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-transform" href="#transform">transform</a>
+                  </li>
+                  <li class="menu-item -level-2"><a class="link title link-validate" href="#validate">validate</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title link-defining-global-rules" href="#defining-global-rules">Defining Global Rules</a>
+              </li>
+              <li class="menu-item -level-1 -parent"><a class="link title link-tips" href="#tips">Tips</a>
+                <ul class="submenu">
+                  <li class="menu-item -level-2"><a class="link title link-working-with-async-code" href="#working-with-async-code">Working with async code</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="menu-item -level-1"><a class="link title link-license" href="#license">License</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <div class="body page-index">
         <div class="header-nav">
@@ -110,7 +112,7 @@
 <span class="pl-k">var</span> validator = osom(schema)
 
 <span class="pl-c">// validate it!</span>
-validator({<span class="hljs-attr">title</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {title: &apos;23&apos;}</span>
+validator({ <span class="hljs-attr">title</span>: <span class="pl-s">&apos;  23  &apos;</span> }) <span class="pl-c">// =&gt; {title: &apos;23&apos;}</span>
 </code></pre>
 <h2 id="usage">Usage</h2>
 <p class="font-large">osom(schema, [global])</p>
@@ -151,7 +153,7 @@ validator({<span class="hljs-attr">title</span>: <span class="pl-s">&apos;  23  
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; {age: 23}</span>
+validator({ <span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span> }) <span class="pl-c">// =&gt; {age: 23}</span>
 </code></pre>
 <h3 id="casting">casting</h3>
 <p>Type: <code>boolean</code><br>
@@ -166,7 +168,7 @@ An <code>TypeError</code> will be throwed under different <code>type</code> eval
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Expected a {string} for &apos;age&apos;.&quot;)</span>
+validator({ <span class="hljs-attr">age</span>: <span class="pl-s">&apos;23&apos;</span> }) <span class="pl-c">// =&gt; TypeError(&quot;Expected a {string} for &apos;age&apos;.&quot;)</span>
 </code></pre>
 <h3 id="required">required</h3>
 <p>Type: <code>boolean</code>|<code>string</code><br>
@@ -214,7 +216,7 @@ Default: <code>[]</code></p>
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;    23   &apos;</span>}) <span class="pl-c">// =&gt; { age: &apos;23&apos; }</span>
+validator({ <span class="hljs-attr">age</span>: <span class="pl-s">&apos;    23   &apos;</span> }) <span class="pl-c">// =&gt; { age: &apos;23&apos; }</span>
 </code></pre>
 <h3 id="validate">validate</h3>
 <p>Type: <code>function</code>|<code>object</code><br>
@@ -231,7 +233,7 @@ If it fails, it throws <code>TypeError</code>.</p>
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;Fail &apos;25&apos; validation for &apos;age&apos;.&quot;)</span>
+validator({ <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> }) <span class="pl-c">// =&gt; TypeError(&quot;Fail &apos;25&apos; validation for &apos;age&apos;.&quot;)</span>
 </code></pre>
 <p>Providing a object brings you the possibility set up a custom error message:</p>
 <pre><code class="lang-js"><span class="pl-k">var</span> schema = {
@@ -247,7 +249,7 @@ validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</spa
 }
 
 <span class="pl-k">var</span> validator = osom(schema)
-validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</span>}) <span class="pl-c">// =&gt; TypeError(&quot;expected a millenial value instead of 25!&quot;)</span>
+validator({ <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> }) <span class="pl-c">// =&gt; TypeError(&quot;expected a millenial value instead of 25!&quot;)</span>
 </code></pre>
 <h2 id="defining-global-rules">Defining Global Rules</h2>
 <p>While is possible provide specific setup per each rule, also is possible provide them as global to apply to all rules.</p>
@@ -267,7 +269,7 @@ validator({<span class="hljs-attr">age</span>: <span class="hljs-number">25</spa
 }
 
 <span class="pl-k">var</span> validator = osom(schema, globalFields)
-validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
+validator({ <span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span> }) <span class="pl-c">// =&gt; {age: &apos;23&apos;}</span>
 </code></pre>
 <p>No problem if later you need to avoid it for a specific case.</p>
 <pre><code class="lang-js"><span class="hljs-function"><span class="pl-k">function</span> <span class="pl-ent">trim</span> (<span class="hljs-params">str</span>) </span>{
@@ -286,7 +288,7 @@ validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &a
 }
 
 <span class="pl-k">var</span> validator = osom(schema, globalFields)
-validator({<span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span>}) <span class="pl-c">// =&gt; {age: &apos;  23  &apos;}</span>
+validator({ <span class="hljs-attr">age</span>: <span class="pl-s">&apos;  23  &apos;</span> }) <span class="pl-c">// =&gt; {age: &apos;  23  &apos;}</span>
 </code></pre>
 <h2 id="tips">Tips</h2>
 <h3 id="working-with-async-code">Working with async code</h3>
