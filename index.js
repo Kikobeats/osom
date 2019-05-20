@@ -31,14 +31,19 @@ function createTypeError (message, key, value) {
 }
 
 function throwTypeError (key, value, type, message) {
-  if (!message || isBoolean(message)) message = `Expected \`${type}\` for \`${key}\`, got \`${value}\``
+  if (!message || isBoolean(message)) {
+    message = `Expected \`${type}\` for \`${key}\`, got \`${value}\``
+  }
   throw createTypeError(message, key, value)
 }
 
 function throwValidationError (key, value, description) {
   let message
-  if (description) message = format(description, value)
-  else message = `Fail '${value}' validation for '${key}'.`
+  if (description) {
+    message = isFunction(description)
+      ? description(value)
+      : format(description, value)
+  } else message = `Fail '${value}' validation for '${key}'.`
   throw createTypeError(message, key, value)
 }
 
@@ -52,47 +57,61 @@ function Osom (schemaBlueprint, globalRules) {
   globalRules = globalRules || {}
   const schemaTypes = {}
 
-  const schema = reduce(schemaBlueprint, function (schema, blueprint, name) {
-    schema = addRule(globalRules, schema, blueprint, name)
-    const type = schema[name].type
-    schemaTypes[name] = type.name.toLowerCase()
-    schema[name].type = chaste(type)
-    return schema
-  }, {})
+  const schema = reduce(
+    schemaBlueprint,
+    function (schema, blueprint, name) {
+      schema = addRule(globalRules, schema, blueprint, name)
+      const type = schema[name].type
+      schemaTypes[name] = type.name.toLowerCase()
+      schema[name].type = chaste(type)
+      return schema
+    },
+    {}
+  )
 
   function osom (obj) {
     obj = obj || {}
 
-    return reduce(schema, function applyRule (objSchema, rule, name) {
-      const value = obj[name]
-      const hasValue = !isNil(value)
-      const validate = rule.validate
-      const isRequired = rule.required || !isNil(validate)
-      const expectedValue = schemaTypes[name]
+    return reduce(
+      schema,
+      function applyRule (objSchema, rule, name) {
+        const value = obj[name]
+        const hasValue = !isNil(value)
+        const validate = rule.validate
+        const isRequired = rule.required || !isNil(validate)
+        const expectedValue = schemaTypes[name]
 
-      const isMissing = !hasValue && !validate && isRequired
-      if (isMissing) throwTypeError(name, value, expectedValue, isRequired)
+        const isMissing = !hasValue && !validate && isRequired
+        if (isMissing) throwTypeError(name, value, expectedValue, isRequired)
 
-      const isCasting = rule.casting
-      const isCastingDisabled = hasValue && !isCasting
-      const isInvalidType = isCastingDisabled && is(value) !== expectedValue
-      if (isInvalidType) throwTypeError(name, value, expectedValue, isRequired)
+        const isCasting = rule.casting
+        const isCastingDisabled = hasValue && !isCasting
+        const isInvalidType = isCastingDisabled && is(value) !== expectedValue
+        if (isInvalidType) {
+          throwTypeError(name, value, expectedValue, isRequired)
+        }
 
-      let TypedValue
-      const defaultValue = isFunction(rule.default) ? rule.default : () => rule.default
-      if (hasValue) TypedValue = isCasting ? rule.type(value) : value
-      else if (defaultValue) TypedValue = defaultValue()
+        let TypedValue
+        const defaultValue = isFunction(rule.default)
+          ? rule.default
+          : () => rule.default
+        if (hasValue) TypedValue = isCasting ? rule.type(value) : value
+        else if (defaultValue) TypedValue = defaultValue()
 
-      TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
+        TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
 
-      if (isRequired && validate) {
-        const validator = getValidator(rule)
-        if (!validator(TypedValue)) throwValidationError(name, value, validate.message)
-      }
+        if (isRequired && validate) {
+          const validator = getValidator(rule)
+          if (!validator(TypedValue)) {
+            throwValidationError(name, value, validate.message)
+          }
+        }
 
-      if (!isNil((TypedValue))) objSchema[name] = TypedValue
-      return objSchema
-    }, {})
+        if (!isNil(TypedValue)) objSchema[name] = TypedValue
+        return objSchema
+      },
+      {}
+    )
   }
 
   return osom

@@ -8,26 +8,20 @@ const osom = require('..')
 describe('schema defintion', function () {
   describe('simple rule', function () {
     it('empty value', function () {
-      [{ age: Number }, { age: { type: Number } }].forEach(function (rule) {
+      ;[{ age: Number }, { age: { type: Number } }].forEach(function (rule) {
         osom(rule)().should.be.eql({})
       })
     })
 
     describe('providing value', function () {
       it('Number', function () {
-        [
-          { age: Number },
-          { age: { type: Number } }
-        ].forEach(function (rule) {
+        ;[{ age: Number }, { age: { type: Number } }].forEach(function (rule) {
           osom(rule)({ age: '23' }).should.be.eql({ age: 23 })
         })
       })
 
       it('Array', function () {
-        [
-          { age: Array },
-          { age: { type: Array } }
-        ].forEach(function (rule) {
+        ;[{ age: Array }, { age: { type: Array } }].forEach(function (rule) {
           osom(rule)({ age: ['23'] }).should.be.eql({ age: ['23'] })
         })
       })
@@ -35,7 +29,7 @@ describe('schema defintion', function () {
   })
 
   it('empty values', function () {
-    [Number, String, Function, Boolean].forEach(function (type) {
+    ;[Number, String, Function, Boolean].forEach(function (type) {
       var schema = {
         age: {
           type: type
@@ -53,7 +47,8 @@ describe('schema defintion', function () {
     it('based in a value', function () {
       var schema = {
         age: {
-          type: Number, default: 23
+          type: Number,
+          default: 23
         }
       }
 
@@ -64,7 +59,10 @@ describe('schema defintion', function () {
     it('based in a fn', function () {
       var schema = {
         age: {
-          type: Number, default: function () { return 23 }
+          type: Number,
+          default: function () {
+            return 23
+          }
         }
       }
 
@@ -99,7 +97,9 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      ;(function () { validator() }).should.throw('Expected `string` for `age`, got `undefined`')
+      ;(function () {
+        validator()
+      }.should.throw('Expected `string` for `age`, got `undefined`'))
     })
 
     it('custom error message', function () {
@@ -112,7 +112,9 @@ describe('schema defintion', function () {
 
       var validator = osom(schema)
       var errMessage = 'your message here'
-      ;(function () { validator() }).should.throw(errMessage)
+      ;(function () {
+        validator()
+      }.should.throw(errMessage))
     })
   })
 
@@ -134,12 +136,14 @@ describe('schema defintion', function () {
 
       var validator = osom(schema, { casting: false })
       ;[{ age: 23 }].forEach(function (obj) {
-        ;(function () { validator(obj) }).should.throw('Expected `string` for `age`, got `23`')
+        ;(function () {
+          validator(obj)
+        }.should.throw('Expected `string` for `age`, got `23`'))
       })
     })
 
     it('works with nill values of the same type', function () {
-      [Number, String, Function, Boolean].forEach(function (type) {
+      ;[Number, String, Function, Boolean].forEach(function (type) {
         var schema = {
           age: {
             type: type
@@ -190,9 +194,15 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      ;(function () { validator() }).should.throw("Fail 'undefined' validation for 'age'.")
-      ;(function () { validator({}) }).should.throw("Fail 'undefined' validation for 'age'.")
-      ;(function () { validator({ age: 25 }) }).should.throw("Fail '25' validation for 'age'.")
+      ;(function () {
+        validator()
+      }.should.throw("Fail 'undefined' validation for 'age'."))
+      ;(function () {
+        validator({})
+      }.should.throw("Fail 'undefined' validation for 'age'."))
+      ;(function () {
+        validator({ age: 25 })
+      }.should.throw("Fail '25' validation for 'age'."))
     })
 
     it('based in a object key', function () {
@@ -208,9 +218,15 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      ;(function () { validator() }).should.throw("Fail 'undefined' validation for 'age'.")
-      ;(function () { validator({}) }).should.throw("Fail 'undefined' validation for 'age'.")
-      ;(function () { validator({ age: 25 }) }).should.throw("Fail '25' validation for 'age'.")
+      ;(function () {
+        validator()
+      }.should.throw("Fail 'undefined' validation for 'age'."))
+      ;(function () {
+        validator({})
+      }.should.throw("Fail 'undefined' validation for 'age'."))
+      ;(function () {
+        validator({ age: 25 })
+      }.should.throw("Fail '25' validation for 'age'."))
     })
 
     it('custom error message', function () {
@@ -228,7 +244,29 @@ describe('schema defintion', function () {
 
       var validator = osom(schema)
       var errMessage = 'expected a millenial value instead of 25!'
-      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
+      ;(function () {
+        validator({ age: 25 })
+      }.should.throw(errMessage))
+    })
+
+    it('custom error message as function', function () {
+      var schema = {
+        age: {
+          type: String,
+          validate: {
+            validator: function (v) {
+              return v === '23'
+            },
+            message: v => `expected a millenial value instead of ${v}!`
+          }
+        }
+      }
+
+      var validator = osom(schema)
+      var errMessage = 'expected a millenial value instead of 25!'
+      ;(function () {
+        validator({ age: 25 })
+      }.should.throw(errMessage))
     })
   })
 })
