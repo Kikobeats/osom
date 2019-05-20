@@ -1,7 +1,6 @@
 'use strict'
 
-const reduce = require('lodash.reduce')
-const merge = require('lodash.merge')
+const { merge, reduce } = require('lodash')
 const chaste = require('chaste')
 const type = require('kind-of')
 

@@ -39,7 +39,7 @@
     "validation"
   ],
   "dependencies": {
-    "chaste": "~1.3.2",
+    "chaste": "~2.0.0",
     "kind-of": "~6.0.2",
     "lodash": "~4.17.11"
   },
