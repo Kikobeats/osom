@@ -65,10 +65,11 @@ function Osom (schemaBlueprint, globalRules) {
     return reduce(schema, function applyRule (objSchema, rule, name) {
       const value = obj[name]
       const hasValue = !isNil(value)
-      const isRequired = rule.required
-      const isMissing = isRequired && !hasValue
+      const validate = rule.validate
+      const isRequired = rule.required || !isNil(validate)
       const expectedValue = schemaTypes[name]
 
+      const isMissing = !hasValue && !validate && isRequired
       if (isMissing) throwTypeError(name, value, expectedValue, isRequired)
 
       const isCasting = rule.casting
@@ -78,13 +79,13 @@ function Osom (schemaBlueprint, globalRules) {
 
       let TypedValue
       const defaultValue = rule.default
-      const validate = rule.validate
+
       if (hasValue) TypedValue = isCasting ? rule.type(value) : value
       else if (defaultValue) TypedValue = !isFunction(defaultValue) ? defaultValue : defaultValue()
 
       TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
 
-      if (hasValue && validate) {
+      if (isRequired && validate) {
         const validator = getValidator(rule)
         if (!validator(TypedValue)) throwValidationError(name, value, validate.message)
       }

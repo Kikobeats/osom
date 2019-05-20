@@ -193,8 +193,9 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
+      ;(function () { validator() }).should.throw("Fail 'undefined' validation for 'age'.")
+      ;(function () { validator({}) }).should.throw("Fail 'undefined' validation for 'age'.")
+      ;(function () { validator({ age: 25 }) }).should.throw("Fail '25' validation for 'age'.")
     })
 
     it('based in a object key', function () {
@@ -210,23 +211,9 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      var errMessage = "Fail '25' validation for 'age'."
-      ;(function () { validator({ age: 25 }) }).should.throw(errMessage)
-    })
-
-    it('just run validator when the field is present', function () {
-      var schema = {
-        name: String,
-        age: {
-          type: String,
-          validate: function (v) {
-            return v === '23'
-          }
-        }
-      }
-
-      var validator = osom(schema)
-      validator({ name: 'foo bar' }).should.be.eql({ name: 'foo bar' })
+      ;(function () { validator() }).should.throw("Fail 'undefined' validation for 'age'.")
+      ;(function () { validator({}) }).should.throw("Fail 'undefined' validation for 'age'.")
+      ;(function () { validator({ age: 25 }) }).should.throw("Fail '25' validation for 'age'.")
     })
 
     it('custom error message', function () {
