@@ -31,7 +31,7 @@ function createTypeError (message, key, value) {
 }
 
 function throwTypeError (key, value, type, message) {
-  if (!message || isBoolean(message)) message = `Expected {${type}} for '${key}'.`
+  if (!message || isBoolean(message)) message = `Expected \`${type}\` for \`${key}\`, got \`${value}\``
   throw createTypeError(message, key, value)
 }
 

@@ -99,8 +99,7 @@ describe('schema defintion', function () {
       }
 
       var validator = osom(schema)
-      var errMessage = "Expected {string} for 'age'."
-      ;(function () { validator() }).should.throw(errMessage)
+      ;(function () { validator() }).should.throw('Expected `string` for `age`, got `undefined`')
     })
 
     it('custom error message', function () {
@@ -133,11 +132,9 @@ describe('schema defintion', function () {
         }
       }
 
-      var errMessage = "Expected {string} for 'age'."
       var validator = osom(schema, { casting: false })
-
       ;[{ age: 23 }].forEach(function (obj) {
-        ;(function () { validator(obj) }).should.throw(errMessage)
+        ;(function () { validator(obj) }).should.throw('Expected `string` for `age`, got `23`')
       })
     })
 
