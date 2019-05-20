@@ -1,6 +1,7 @@
 'use strict'
 
 const { isNil, isFunction, isBoolean, merge, reduce } = require('lodash')
+const { format } = require('util')
 const chaste = require('chaste')
 const is = require('kind-of')
 
@@ -36,7 +37,7 @@ function throwTypeError (key, value, type, message) {
 
 function throwValidationError (key, value, description) {
   let message
-  if (description) message = description.replace('{VALUE}', value)
+  if (description) message = format(description, value)
   else message = `Fail '${value}' validation for '${key}'.`
   throw createTypeError(message, key, value)
 }

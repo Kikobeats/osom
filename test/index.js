@@ -224,7 +224,7 @@ describe('schema defintion', function () {
             validator: function (v) {
               return v === '23'
             },
-            message: 'expected a millenial value instead of {VALUE}!'
+            message: 'expected a millenial value instead of %s!'
           }
         }
       }
