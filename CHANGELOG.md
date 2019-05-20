@@ -1,3 +1,10 @@
+<a name="2.3.1"></a>
+## 2.3.1 (2019-05-20)
+
+* refactor: remove unnecessary code ([bf823a9](https://github.com/kikobeats/osom/commit/bf823a9))
+
+
+
 <a name="2.3.0"></a>
 # 2.3.0 (2019-05-20)
 
