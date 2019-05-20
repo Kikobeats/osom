@@ -79,10 +79,9 @@ function Osom (schemaBlueprint, globalRules) {
       if (isInvalidType) throwTypeError(name, value, expectedValue, isRequired)
 
       let TypedValue
-      const defaultValue = rule.default
-
+      const defaultValue = isFunction(rule.default) ? rule.default : () => rule.default
       if (hasValue) TypedValue = isCasting ? rule.type(value) : value
-      else if (defaultValue) TypedValue = !isFunction(defaultValue) ? defaultValue : defaultValue()
+      else if (defaultValue) TypedValue = defaultValue()
 
       TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
 
