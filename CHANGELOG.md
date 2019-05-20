@@ -1,3 +1,10 @@
+<a name="3.0.1"></a>
+## 3.0.1 (2019-05-20)
+
+* feat: custom message as function support ([9dc5480](https://github.com/kikobeats/osom/commit/9dc5480))
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2019-05-20)
 
