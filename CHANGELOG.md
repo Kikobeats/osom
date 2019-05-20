@@ -1,3 +1,19 @@
+<a name="2.3.0"></a>
+# 2.3.0 (2019-05-20)
+
+* refactor: remove unnecessary code ([3817ba0](https://github.com/kikobeats/osom/commit/3817ba0))
+* build: update dependencies ([f1faa07](https://github.com/kikobeats/osom/commit/f1faa07))
+* build: update dependencies ([eeafb5b](https://github.com/kikobeats/osom/commit/eeafb5b))
+* build: use lodash dependency ([b4e0794](https://github.com/kikobeats/osom/commit/b4e0794))
+* ci: update builds ([05af5c2](https://github.com/kikobeats/osom/commit/05af5c2))
+* fix: linter ([ad53e4b](https://github.com/kikobeats/osom/commit/ad53e4b))
+* fix(package): update kind-of to version 5.1.0 ([7ff1797](https://github.com/kikobeats/osom/commit/7ff1797))
+* fix(package): update kind-of to version 6.0.0 ([efcddb7](https://github.com/kikobeats/osom/commit/efcddb7))
+* Update README.md ([aeef687](https://github.com/kikobeats/osom/commit/aeef687))
+* docs(readme): add Greenkeeper badge ([b9d8203](https://github.com/kikobeats/osom/commit/b9d8203))
+
+
+
 <a name="2.2.2"></a>
 ## 2.2.2 (2017-07-19)
 
