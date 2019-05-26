@@ -181,7 +181,7 @@ validator({}) // => { age: 23 }
 
 ### transform
 
-Type: `array`<br>
+Type: `function`|`array`<br>
 Default: `[]`
 
 It transforms the input value.
