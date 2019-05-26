@@ -20,10 +20,9 @@ function createSchemaRule (rule, globalRules) {
 
 function addRule (globalRules, schema, blueprint, name) {
   schema[name] = createSchemaRule(blueprint, globalRules)
-  return schema
 }
 
-function createTypeError (message, key, value) {
+function typeError (message, key, value) {
   const error = new TypeError(message)
   error.key = key
   error.value = value
@@ -34,7 +33,7 @@ function throwTypeError (key, value, type, message) {
   if (!message || isBoolean(message)) {
     message = `Expected \`${type}\` for \`${key}\`, got \`${value}\``
   }
-  throw createTypeError(message, key, value)
+  throw typeError(message, key, value)
 }
 
 function throwValidationError (key, value, description) {
@@ -44,7 +43,7 @@ function throwValidationError (key, value, description) {
       ? description(value)
       : format(description, value)
   } else message = `Fail '${value}' validation for '${key}'.`
-  throw createTypeError(message, key, value)
+  throw typeError(message, key, value)
 }
 
 function getValidator (rule) {
@@ -60,7 +59,7 @@ function Osom (schemaBlueprint, globalRules) {
   const schema = reduce(
     schemaBlueprint,
     function (schema, blueprint, name) {
-      schema = addRule(globalRules, schema, blueprint, name)
+      addRule(globalRules, schema, blueprint, name)
       const type = schema[name].type
       schemaTypes[name] = type.name.toLowerCase()
       schema[name].type = chaste(type)
