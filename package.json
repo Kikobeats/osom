@@ -65,6 +65,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard && standard-markdown",
     "pretest": "npm run lint",
+    "release": "bumped release",
     "test": "nyc mocha"
   },
   "license": "MIT"
