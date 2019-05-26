@@ -14,7 +14,7 @@ const DEFAULT = {
 
 function createSchemaRule (rule, globalRules) {
   const schema = isFunction(rule) ? { type: rule } : rule
-  const fields = merge(globalRules, schema)
+  const fields = merge({}, globalRules, schema)
   return Object.assign({ ...DEFAULT.BLUEPRINT, ...fields })
 }
 
