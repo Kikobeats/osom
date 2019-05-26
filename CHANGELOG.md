@@ -1,3 +1,11 @@
+<a name="3.0.3"></a>
+## 3.0.3 (2019-05-26)
+
+* fix: ensure transform is an array ([61ae614](https://github.com/kikobeats/osom/commit/61ae614))
+* fix: ensure transform is an array ([aa970e7](https://github.com/kikobeats/osom/commit/aa970e7))
+
+
+
 <a name="3.0.2"></a>
 ## 3.0.2 (2019-05-26)
 
