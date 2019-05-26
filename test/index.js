@@ -79,6 +79,22 @@ describe('schema defintion', function () {
     var schema = {
       age: {
         type: String,
+        transform: trim
+      }
+    }
+
+    var validator = osom(schema)
+    validator({ age: '  23  ' }).should.be.eql({ age: '23' })
+  })
+
+  it('support a collection of transforms', function () {
+    function trim (str) {
+      return str.trim()
+    }
+
+    var schema = {
+      age: {
+        type: String,
         transform: [trim]
       }
     }
