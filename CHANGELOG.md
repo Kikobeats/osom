@@ -1,3 +1,12 @@
+<a name="3.0.2"></a>
+## 3.0.2 (2019-05-26)
+
+* build: add release script ([8e12412](https://github.com/kikobeats/osom/commit/8e12412))
+* refactor: remove unnecessary code ([24028c7](https://github.com/kikobeats/osom/commit/24028c7))
+* fix: avoid mutation ([3ddf288](https://github.com/kikobeats/osom/commit/3ddf288))
+
+
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2019-05-20)
 
