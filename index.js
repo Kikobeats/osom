@@ -1,6 +1,13 @@
 'use strict'
 
-const { isNil, isFunction, isBoolean, merge, reduce } = require('lodash')
+const {
+  isNil,
+  isFunction,
+  isBoolean,
+  merge,
+  reduce,
+  castArray
+} = require('lodash')
 const { format } = require('util')
 const chaste = require('chaste')
 const is = require('kind-of')
@@ -97,7 +104,11 @@ function Osom (schemaBlueprint, globalRules) {
         if (hasValue) TypedValue = isCasting ? rule.type(value) : value
         else if (defaultValue) TypedValue = defaultValue()
 
-        TypedValue = reduce(rule.transform, (acc, fn) => fn(acc), TypedValue)
+        TypedValue = reduce(
+          castArray(rule.transform),
+          (acc, fn) => fn(acc),
+          TypedValue
+        )
 
         if (isRequired && validate) {
           const validator = getValidator(rule)
