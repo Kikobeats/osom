@@ -95,7 +95,7 @@ Each key of the object represent a **rule** . It's possible setup different thin
 
 Type: `function`
 
-As in *basic* mode, it specifies the `type of the output value:
+As in *basic* mode, it specifies the `type` of the output value:
 
 ```js
 var schema = {
