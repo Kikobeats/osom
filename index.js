@@ -1,13 +1,6 @@
 'use strict'
 
-const {
-  isNil,
-  isFunction,
-  isBoolean,
-  merge,
-  reduce,
-  castArray
-} = require('lodash')
+const { isNil, isFunction, isBoolean, merge, reduce, castArray } = require('lodash')
 const { format } = require('util')
 const chaste = require('chaste')
 const is = require('kind-of')
@@ -46,9 +39,7 @@ function throwTypeError (key, value, type, message) {
 function throwValidationError (key, value, description) {
   let message
   if (description) {
-    message = isFunction(description)
-      ? description(value)
-      : format(description, value)
+    message = isFunction(description) ? description(value) : format(description, value)
   } else message = `Fail '${value}' validation for '${key}'.`
   throw typeError(message, key, value)
 }
@@ -98,17 +89,11 @@ function Osom (schemaBlueprint, globalRules) {
         }
 
         let TypedValue
-        const defaultValue = isFunction(rule.default)
-          ? rule.default
-          : () => rule.default
+        const defaultValue = isFunction(rule.default) ? rule.default : () => rule.default
         if (hasValue) TypedValue = isCasting ? rule.type(value) : value
         else if (defaultValue) TypedValue = defaultValue()
 
-        TypedValue = reduce(
-          castArray(rule.transform),
-          (acc, fn) => fn(acc),
-          TypedValue
-        )
+        TypedValue = reduce(castArray(rule.transform), (acc, fn) => fn(acc), TypedValue)
 
         if (isRequired && validate) {
           const validator = getValidator(rule)
