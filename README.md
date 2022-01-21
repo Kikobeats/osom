@@ -21,7 +21,7 @@ $ npm install osom --save
 ## Preview
 
 ```js
-var osom = require('osom')
+const osom = require('osom')
 
 function trim (str) {
   return str.trim()
@@ -32,7 +32,7 @@ function isValidTitle (str) {
 }
 
 // setup your schema
-var schema = {
+const schema = {
   title: {
     type: String,
     validate: isValidTitle,
@@ -47,7 +47,7 @@ var schema = {
 }
 
 // create validator based on schemas
-var validator = osom(schema)
+const validator = osom(schema)
 
 // validate it!
 validator({ title: '  23  ' }) // => {title: '23'}
@@ -74,7 +74,7 @@ The most common use case is validate the `type` of something.
 If you are only interested in the `type`, you can provide a simple schema like:
 
 ```js
-var simpleSchema = {
+const simpleSchema = {
   age: Number
 }
 ```
@@ -98,7 +98,7 @@ Type: `function`
 As in *basic* mode, it specifies the `type` of the output value:
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: Number
   }
@@ -108,13 +108,13 @@ var schema = {
 Internally it uses [chaste](https://github.com/Kikobeats/chaste). This makes easy casting compatible types:
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: Number
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({ age: '23' }) // => {age: 23}
 ```
 
@@ -127,14 +127,14 @@ It enable/disable type casting.
 An `TypeError` will be throwed under different `type` evaluation.
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: String,
     casting: false
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({ age: '23' }) // => TypeError("Expected a {string} for 'age'.")
 ```
 
@@ -148,14 +148,14 @@ It marks a rule as required field and throws `TypeError` if value for the field 
 Additionally is possible provide a custom error message. For do it, pass an `String`.
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: String,
     required: 'sorry but you must provide an age.'
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({}) // => TypeError("sorry but you must provide an age")
 ```
 
@@ -169,13 +169,13 @@ It sets a default value if `nill` value as input is provided.
 Additionally you can provide a `function` for set a dynamic value:
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: Number, default: function () { return 23 }
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({}) // => { age: 23 }
 ```
 
@@ -193,14 +193,14 @@ function trim (str) {
   return str.trim()
 }
 
-var schema = {
+const schema = {
   age: {
     type: String,
     transform: [trim]
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({ age: '    23   ' }) // => { age: '23' }
 ```
 
@@ -213,7 +213,7 @@ It set up a `function` that will be exec to validate the input value.
 If it fails, it throws `TypeError`.
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: String,
     validate: function (v) {
@@ -222,14 +222,14 @@ var schema = {
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({ age: 25 }) // => TypeError("Fail '25' validation for 'age'.")
 ```
 
 Providing a object brings you the possibility set up a custom error message:
 
 ```js
-var schema = {
+const schema = {
   age: {
     type: String,
     validate: {
@@ -241,7 +241,7 @@ var schema = {
   }
 }
 
-var validator = osom(schema)
+const validator = osom(schema)
 validator({ age: 25 }) // => TypeError("expected a millenial value instead of 25!")
 ```
 
@@ -256,17 +256,17 @@ function trim (str) {
   return str.trim()
 }
 
-var schema = {
+const schema = {
   age: {
     type: String
   }
 }
 
-var globalFields = {
+const globalFields = {
   transform: [trim]
 }
 
-var validator = osom(schema, globalFields)
+const validator = osom(schema, globalFields)
 validator({ age: '  23  ' }) // => {age: '23'}
 ```
 
@@ -277,18 +277,18 @@ function trim (str) {
   return str.trim()
 }
 
-var schema = {
+const schema = {
   age: {
     type: String,
     transform: []
   }
 }
 
-var globalFields = {
+const globalFields = {
   transform: [trim]
 }
 
-var validator = osom(schema, globalFields)
+const validator = osom(schema, globalFields)
 validator({ age: '  23  ' }) // => {age: '  23  '}
 ```
 
@@ -303,7 +303,7 @@ However, you can use it comfortably in a async workflow transforming the interfa
 For example, consider use [async#asyncify](https://github.com/caolan/async#asyncify) for do it. we could have a `schema.js` file like:
 
 ```js
-var schema = osom({
+const schema = osom({
   title: {
     type: String,
     validate: isValidTitle,
@@ -324,7 +324,7 @@ module.exports.sync = schema
 Then you only need use it into a async workflow:
 
 ```js
-var schema = require('./schema')
+const schema = require('./schema')
 schema(data, function (validationError, instance) {
   /** do something */
 })
