@@ -30,13 +30,13 @@ describe('schema defintion', function () {
 
   it('empty values', function () {
     ;[Number, String, Function, Boolean].forEach(function (type) {
-      var schema = {
+      const schema = {
         age: {
           type: type
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       ;[null, {}].forEach(function (data) {
         validator(data).should.be.eql({})
       })
@@ -45,19 +45,19 @@ describe('schema defintion', function () {
 
   describe('support default values', function () {
     it('based in a value', function () {
-      var schema = {
+      const schema = {
         age: {
           type: Number,
           default: 23
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       validator().should.be.eql({ age: 23 })
     })
 
     it('based in a fn', function () {
-      var schema = {
+      const schema = {
         age: {
           type: Number,
           default: function () {
@@ -66,7 +66,7 @@ describe('schema defintion', function () {
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       validator().should.be.eql({ age: 23 })
     })
   })
@@ -76,14 +76,14 @@ describe('schema defintion', function () {
       return str.trim()
     }
 
-    var schema = {
+    const schema = {
       age: {
         type: String,
         transform: trim
       }
     }
 
-    var validator = osom(schema)
+    const validator = osom(schema)
     validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 
@@ -92,42 +92,42 @@ describe('schema defintion', function () {
       return str.trim()
     }
 
-    var schema = {
+    const schema = {
       age: {
         type: String,
         transform: [trim]
       }
     }
 
-    var validator = osom(schema)
+    const validator = osom(schema)
     validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 
   describe('support required values', function () {
     it('throw an error under no values', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           required: true
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       ;(function () {
         validator()
       }.should.throw('Expected `string` for `age`, got `undefined`'))
     })
 
     it('custom error message', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           required: 'your message here'
         }
       }
 
-      var validator = osom(schema)
-      var errMessage = 'your message here'
+      const validator = osom(schema)
+      const errMessage = 'your message here'
       ;(function () {
         validator()
       }.should.throw(errMessage))
@@ -136,21 +136,21 @@ describe('schema defintion', function () {
 
   describe('support casting by default', function () {
     it('enable (by default)', function () {
-      var schema = { age: Array }
-      var validator = osom(schema)
+      const schema = { age: Array }
+      const validator = osom(schema)
       validator({ age: '23' }).should.be.eql({ age: ['23'] })
     })
   })
 
   describe('casting disabled explicitly', function () {
     it('throw an error under different type provided', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String
         }
       }
 
-      var validator = osom(schema, { casting: false })
+      const validator = osom(schema, { casting: false })
       ;[{ age: 23 }].forEach(function (obj) {
         ;(function () {
           validator(obj)
@@ -160,13 +160,13 @@ describe('schema defintion', function () {
 
     it('works with nill values of the same type', function () {
       ;[Number, String, Function, Boolean].forEach(function (type) {
-        var schema = {
+        const schema = {
           age: {
             type: type
           }
         }
 
-        var validator = osom(schema, { casting: false })
+        const validator = osom(schema, { casting: false })
         ;[null, {}, { age: null }].forEach(function (data) {
           validator(data).should.be.eql({})
         })
@@ -174,33 +174,33 @@ describe('schema defintion', function () {
     })
 
     it('works with default value (not necessary of the same type defined)', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           default: 23
         }
       }
 
-      var validator = osom(schema, { casting: false })
+      const validator = osom(schema, { casting: false })
       validator({}).should.be.eql({ age: 23 })
     })
 
     it('works with a value provided of the same type', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           default: '24'
         }
       }
 
-      var validator = osom(schema, { casting: false })
+      const validator = osom(schema, { casting: false })
       validator({ age: '23' }).should.be.eql({ age: '23' })
     })
   })
 
   describe('support validation', function () {
     it('based in a function', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           validate: function (v) {
@@ -209,7 +209,7 @@ describe('schema defintion', function () {
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       ;(function () {
         validator()
       }.should.throw("Fail 'undefined' validation for 'age'."))
@@ -222,7 +222,7 @@ describe('schema defintion', function () {
     })
 
     it('based in a object key', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           validate: {
@@ -233,7 +233,7 @@ describe('schema defintion', function () {
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
       ;(function () {
         validator()
       }.should.throw("Fail 'undefined' validation for 'age'."))
@@ -246,7 +246,7 @@ describe('schema defintion', function () {
     })
 
     it('custom error message', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           validate: {
@@ -258,15 +258,15 @@ describe('schema defintion', function () {
         }
       }
 
-      var validator = osom(schema)
-      var errMessage = 'expected a millenial value instead of 25!'
+      const validator = osom(schema)
+      const errMessage = 'expected a millenial value instead of 25!'
       ;(function () {
         validator({ age: 25 })
       }.should.throw(errMessage))
     })
 
     it('custom error message as function', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           validate: {
@@ -278,8 +278,8 @@ describe('schema defintion', function () {
         }
       }
 
-      var validator = osom(schema)
-      var errMessage = 'expected a millenial value instead of 25!'
+      const validator = osom(schema)
+      const errMessage = 'expected a millenial value instead of 25!'
       ;(function () {
         validator({ age: 25 })
       }.should.throw(errMessage))
@@ -290,14 +290,14 @@ describe('schema defintion', function () {
 describe('error', function () {
   describe('attach key and value into error object', function () {
     it('when value is not present', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           required: true
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
 
       try {
         validator()
@@ -308,7 +308,7 @@ describe('error', function () {
     })
 
     it('when value is present', function () {
-      var schema = {
+      const schema = {
         age: {
           type: String,
           validate: {
@@ -320,7 +320,7 @@ describe('error', function () {
         }
       }
 
-      var validator = osom(schema)
+      const validator = osom(schema)
 
       try {
         validator({ age: 25 })
@@ -338,17 +338,17 @@ describe('behavior', function () {
       return str.trim()
     }
 
-    var schema = {
+    const schema = {
       age: {
         type: String
       }
     }
 
-    var globalFields = {
+    const globalFields = {
       transform: [trim]
     }
 
-    var validator = osom(schema, globalFields)
+    const validator = osom(schema, globalFields)
     validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 })
