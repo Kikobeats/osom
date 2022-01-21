@@ -1,3 +1,9 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 3.0.4 (2022-01-21)
+
 <a name="3.0.3"></a>
 ## 3.0.3 (2019-05-26)
 
@@ -254,6 +260,3 @@
 * setup keywords ([82e56ea](https://github.com/kikobeats/osom/commit/82e56ea))
 * setup node correctly ([2b9222c](https://github.com/kikobeats/osom/commit/2b9222c))
 * Support default values ([06a7575](https://github.com/kikobeats/osom/commit/06a7575))
-
-
-
