@@ -32,7 +32,7 @@ describe('schema defintion', function () {
     ;[Number, String, Function, Boolean].forEach(function (type) {
       const schema = {
         age: {
-          type: type
+          type
         }
       }
 
@@ -162,7 +162,7 @@ describe('schema defintion', function () {
       ;[Number, String, Function, Boolean].forEach(function (type) {
         const schema = {
           age: {
-            type: type
+            type
           }
         }
 
