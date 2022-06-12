@@ -9,6 +9,16 @@
     "name": "Kiko Beats",
     "url": "https://github.com/Kikobeats"
   },
+  "contributors": [
+    {
+      "name": "Andy Pai",
+      "email": "andy@lapwinglabs.com"
+    },
+    {
+      "name": "Ilya Radchenko",
+      "email": "ilya@burstcreations.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kikobeats/osom.git"
