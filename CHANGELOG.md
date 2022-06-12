@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.0.9 (2022-06-12)
+
+
+### Bug Fixes
+
+* linter ([739c421](https://github.com/kikobeats/osom/commit/739c4212dd6a6b4262446ae4e6baec2e09c86e56))
+
 ### 3.0.8 (2022-06-12)
 
 ### 3.0.7 (2022-03-02)
