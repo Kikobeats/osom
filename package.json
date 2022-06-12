@@ -39,9 +39,9 @@
     "validation"
   ],
   "dependencies": {
-    "chaste": "~2.0.0",
-    "kind-of": "~6.0.2",
-    "lodash": "~4.17.11"
+    "chaste": "~3.0.1",
+    "kind-of": "~6.0.3",
+    "lodash": "~4.17.21"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
