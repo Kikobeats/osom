@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/kikobeats/osom/compare/v3.0.9...v3.1.0) (2022-06-12)
+
+
+### Features
+
+* update dependencies ([3c605e1](https://github.com/kikobeats/osom/commit/3c605e1782412e10d1f7e4870244013cc43a2b59))
+
 ### 3.0.9 (2022-06-12)
 
 
