@@ -87,6 +87,24 @@ describe('schema defintion', function () {
     validator({ age: '  23  ' }).should.be.eql({ age: '23' })
   })
 
+  it('support transforms passing input as second parameter', function () {
+    const schema = {
+      url: {
+        type: String
+      },
+      waitUntil: {
+        type: Number,
+        transform: (n, { url }) => (url.includes('twitter') ? 1500 : 0)
+      }
+    }
+
+    const validator = osom(schema)
+    validator({ url: 'https://twitter.com/kikobeats' }).should.be.eql({
+      url: 'https://twitter.com/kikobeats',
+      waitUntil: 1500
+    })
+  })
+
   it('support a collection of transforms', function () {
     function trim (str) {
       return str.trim()
