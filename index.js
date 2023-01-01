@@ -93,7 +93,7 @@ function Osom (schemaBlueprint, globalRules) {
         if (hasValue) TypedValue = isCasting ? rule.type(value) : value
         else if (defaultValue) TypedValue = defaultValue()
 
-        TypedValue = reduce(castArray(rule.transform), (acc, fn) => fn(acc), TypedValue)
+        TypedValue = reduce(castArray(rule.transform), (acc, fn) => fn(acc, obj), TypedValue)
 
         if (isRequired && validate) {
           const validator = getValidator(rule)
