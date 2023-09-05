@@ -2,7 +2,7 @@
   "name": "osom",
   "description": "An Awesome [/osom/] Object Schema Modeling",
   "homepage": "https://osom.js.org",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "main": "index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
