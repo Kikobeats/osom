@@ -42,7 +42,7 @@
   "dependencies": {
     "chaste": "~3.0.1",
     "kind-of": "~6.0.3",
-    "lodash": "~4.17.21"
+    "lodash": "~4.18.1"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
